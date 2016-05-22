@@ -1,27 +1,22 @@
 # vue-threejs
 
-> A Vue.js project
+> [WIP] Simplest bindings between [Vue][react] & [Three.js][threejs]
+> Migrated from [react-threejs](https://github.com/fritx/react-threejs)
 
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
+```vue
+<template>
+  <renderer :size="size">
+    <camera></camera>
+    <scene></scene>
+  </renderer>
+</template>
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+**Study Notes**
+
+- [v-ref is not working with ~~<template>~~(dom) element](https://github.com/vuejs/vue/issues/681#issuecomment-75802646)
+- [Can I use a compoent inherit other compoent?](https://github.com/vuejs/Discussion/issues/354#issuecomment-133019536)
+
+[react-threejs]: https://github.com/fritx/react-threejs
+[react]: https://github.com/facebook/react
+[threejs]: https://github.com/mrdoob/three.js
