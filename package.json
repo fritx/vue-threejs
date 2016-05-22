@@ -1,7 +1,7 @@
 {
   "name": "vue-threejs",
-  "version": "1.0.0",
-  "description": "A Vue.js project",
+  "version": "0.0.0",
+  "description": "Simplest bindings between Vue & Three.js",
   "author": "Fritz Lin <uxfritz@163.com>",
   "private": true,
   "scripts": {

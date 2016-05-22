@@ -3,11 +3,15 @@
 > [WIP] Simplest bindings between [Vue][react] & [Three.js][threejs]
 > Migrated from [react-threejs](https://github.com/fritx/react-threejs)
 
+<img width="400" src="https://github.com/fritx/react-threejs/raw/dev/debugging.jpg">
+
 ```vue
 <template>
   <renderer :size="size">
-    <camera></camera>
-    <scene></scene>
+    <scene>
+      <camera :size="size" :position="camPos"></camera>
+      <ocean :position="oceanPos"></ocean>
+    </scene>
   </renderer>
 </template>
 ```
