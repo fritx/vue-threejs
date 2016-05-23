@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App'
-import VueThreejs from './'
+import VueThreejs from '../'
 
 Vue.use(VueThreejs)
 

@@ -3,28 +3,26 @@
 </style>
 
 <template>
-  <renderer :size="size">
+  <renderer :dim="dim">
     <scene>
-      <camera :size="size" :position="camPos"></camera>
-      <ocean :position="oceanPos"></ocean>
+      <camera :dim="dim" :position="{ z: 15 }"></camera>
+      <ocean :position="{ y: -200 }"></ocean>
     </scene>
   </renderer>
 </template>
 
 <script>
-  import Ocean from './examples/Ocean'
+  import Ocean from './Ocean'
 
   export default {
     components: { Ocean },
 
     data () {
       return {
-        size: {
+        dim: {
           width: window.innerWidth,
           height: window.innerHeight
-        },
-        oceanPos: { y: -200 },
-        camPos: { z: 15 }
+        }
       }
     }
   }

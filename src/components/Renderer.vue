@@ -9,7 +9,7 @@ import { WebGLRenderer } from 'three'
 
 export default {
   props: {
-    size: {
+    dim: {
       type: Object, // { width, height }
       required: true
     },
@@ -22,7 +22,7 @@ export default {
       this.obj = new WebGLRenderer({ antialias: true })
     }
     this.obj.name = this.obj.name || this.constructor.name
-    this.obj.setSize(this.size.width, this.size.height)
+    this.obj.setSize(this.dim.width, this.dim.height)
     this.obj.setClearColor(0x000000)
   },
 

@@ -10,7 +10,7 @@ export default {
   mixins: [Object3D],
 
   props: {
-    size: {
+    dim: {
       type: Object, // { width, height }
       required: true
     },
@@ -20,7 +20,7 @@ export default {
   },
 
   created () {
-    const { width, height } = this.size
+    const { width, height } = this.dim
     if (!(this.obj instanceof Camera)) {
       this.obj = new PerspectiveCamera(75, width / height, 0.1, 1000)
     }

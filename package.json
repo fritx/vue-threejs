@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "description": "Simplest bindings between Vue & Three.js",
   "author": "Fritz Lin <uxfritz@163.com>",
-  "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
@@ -11,11 +10,11 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
-    "babel-runtime": "^6.0.0",
-    "vue": "^1.0.21"
+    "babel-runtime": "^6.0.0"
   },
   "peerDependencies": {
-    "three": "^0.76.1"
+    "three": "^0.76.1",
+    "vue": "^1.0.21"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
