@@ -18,14 +18,17 @@ export default {
       this.obj = new Scene()
     }
     this.obj.name = this.obj.name || this.constructor.name
-    window.scene = this.obj
 
     // for threejs-inspector to work
     // https://github.com/jeromeetienne/threejs-inspector
     if (process.env.NODE_ENV === 'development') {
       window.THREE = THREE
-      // window.scene = this.obj
+      window.scene = this.obj
     }
+  },
+
+  ready () {
+    this.$dispatch('setScene', this.obj)
   }
 }
 </script>

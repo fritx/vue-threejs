@@ -3,9 +3,9 @@
 </style>
 
 <template>
-  <renderer :dim="dim">
+  <renderer :size="size">
     <scene>
-      <camera :dim="dim" :position="{ z: 15 }"></camera>
+      <camera :position="{ z: 15 }"></camera>
       <ocean :position="{ y: -200 }"></ocean>
     </scene>
   </renderer>
@@ -19,9 +19,9 @@
 
     data () {
       return {
-        dim: {
-          width: window.innerWidth,
-          height: window.innerHeight
+        size: {
+          w: window.innerWidth,
+          h: window.innerHeight
         }
       }
     }

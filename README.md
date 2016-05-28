@@ -13,9 +13,9 @@ Vue.use(VueThreejs)
 
 ```vue
 <template>
-  <renderer :dim="dim">
+  <renderer :size="{ w: 600, h: 400 }">
     <scene>
-      <camera :dim="dim" :position="{ z: 15 }"></camera>
+      <camera :position="{ z: 15 }"></camera>
       <object3d :obj="mesh" :position="{ y: -200 }"></object3d>
     </scene>
   </renderer>

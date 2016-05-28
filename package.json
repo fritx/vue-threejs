@@ -13,8 +13,8 @@
     "babel-runtime": "^6.0.0"
   },
   "peerDependencies": {
-    "three": "^0.76.1",
-    "vue": "^1.0.21"
+    "three": "*",
+    "vue": "*"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",

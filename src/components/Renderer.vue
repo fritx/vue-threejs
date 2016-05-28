@@ -9,8 +9,8 @@ import { WebGLRenderer } from 'three'
 
 export default {
   props: {
-    dim: {
-      type: Object, // { width, height }
+    size: {
+      type: Object, // { w, h }
       required: true
     },
     obj: { type: WebGLRenderer }
@@ -22,8 +22,12 @@ export default {
       this.obj = new WebGLRenderer({ antialias: true })
     }
     this.obj.name = this.obj.name || this.constructor.name
-    this.obj.setSize(this.dim.width, this.dim.height)
+    this.obj.setSize(this.size.w, this.size.h)
+    this.$root.__rendererSize = this.size // fixme
+
     this.obj.setClearColor(0x000000)
+    this.scene = null
+    this.camera = null
   },
 
   ready () {
@@ -31,11 +35,19 @@ export default {
     this.animate()
   },
 
+  events: {
+    setScene (scene) {
+      this.scene = scene
+    },
+    setCamera (camera) {
+      this.camera = camera
+    }
+  },
+
   methods: {
     animate () {
       requestAnimationFrame(this.animate)
-      // this.obj.render(this.scene, this.camera)
-      this.obj.render(window.scene, window.camera)
+      this.obj.render(this.scene, this.camera)
     }
   }
 }
