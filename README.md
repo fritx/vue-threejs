@@ -1,6 +1,6 @@
 # vue-threejs
 
-> [WIP] Simplest bindings between [Vue][react] & [Three.js][threejs]
+> \[WIP\] [Vue][vue] bindings for [Three.js][threejs]
 
 > Migrated from [react-threejs](https://github.com/fritx/react-threejs)
 
@@ -28,5 +28,5 @@ Vue.use(VueThreejs)
 - [Can I use a compoent inherit other compoent?](https://github.com/vuejs/Discussion/issues/354#issuecomment-133019536)
 
 [react-threejs]: https://github.com/fritx/react-threejs
-[react]: https://github.com/facebook/react
 [threejs]: https://github.com/mrdoob/three.js
+[vue]: https://github.com/vuejs/vue

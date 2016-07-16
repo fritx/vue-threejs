@@ -46,7 +46,7 @@ module.exports = merge(baseWebpackConfig, {
       filename: process.env.NODE_ENV === 'testing'
         ? 'index.html'
         : config.build.index,
-      template: 'src/index.html',
+      template: 'src/examples/index.html',
       inject: true,
       minify: {
         removeComments: true,

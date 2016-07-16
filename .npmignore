@@ -3,4 +3,3 @@ config
 src
 static
 .*
-index.html

@@ -1,13 +1,13 @@
 {
   "name": "vue-threejs",
   "version": "0.0.0",
-  "description": "Simplest bindings between Vue & Three.js",
+  "description": "Vue bindings for Three.js",
   "author": "Fritz Lin <uxfritz@163.com>",
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
-    "test": "",
-    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
+    "test": "npm run lint",
+    "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
     "babel-runtime": "^6.0.0"

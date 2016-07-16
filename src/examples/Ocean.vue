@@ -9,6 +9,8 @@ import Object3D from '../components/Object3D'
 
 // http://threejs.org/examples/#webgl_geometry_dynamic
 export default {
+  name: 'Ocean',
+
   mixins: [Object3D],
 
   created () {
