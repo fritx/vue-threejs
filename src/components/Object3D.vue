@@ -42,7 +42,10 @@ export default {
     if (!(this._obj instanceof Object3D)) {
       this._obj = new Object3D()
     }
-    this._obj.name = this._obj.name || this.constructor.name
+
+    // fix vue 2.0 `this.constructor.name` becomes `VueComponent`
+    // this._obj.name = this._obj.name || this.constructor.name
+    this._obj.name = this._obj.name || this._obj.type
   },
 
   mounted () {

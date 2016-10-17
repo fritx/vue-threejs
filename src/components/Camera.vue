@@ -23,7 +23,7 @@ export default {
     if (!(this._obj instanceof Camera)) {
       this._obj = new PerspectiveCamera(75, w / h, 0.1, 1000)
     }
-    this._obj.name = this._obj.name || this.constructor.name
+    this._obj.name = this._obj.name || this._obj.type
   },
 
   mounted () {
