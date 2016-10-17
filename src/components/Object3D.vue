@@ -4,6 +4,7 @@
 
 <script>
 import { Object3D } from 'three'
+import { assign } from '../util'
 
 export default {
   props: {
@@ -14,10 +15,10 @@ export default {
 
   watch: {
     position (v) {
-      if (v) Object.assign(this.obj.position, v)
+      if (v) assign(this.obj.position, v)
     },
     rotation (v) {
-      if (v) Object.assign(this.obj.rotation, v)
+      if (v) assign(this.obj.rotation, v)
     }
   },
 
@@ -37,8 +38,8 @@ export default {
   },
 
   mounted () {
-    if (this.position) Object.assign(this.obj.position, this.position)
-    if (this.rotation) Object.assign(this.obj.rotation, this.rotation)
+    if (this.position) assign(this.obj.position, this.position)
+    if (this.rotation) assign(this.obj.rotation, this.rotation)
     if (this.parent) this.parent.add(this.obj)
   },
 
