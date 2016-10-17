@@ -5,6 +5,7 @@
 <script>
 import { Camera, PerspectiveCamera } from 'three'
 import Object3D from './Object3D'
+import bus from '../bus'
 
 export default {
   mixins: [Object3D],
@@ -24,7 +25,7 @@ export default {
   },
 
   mounted () {
-    this.$dispatch('setCamera', this._obj)
+    bus.$emit('setCamera', this._obj)
   }
 }
 </script>
