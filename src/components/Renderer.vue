@@ -32,7 +32,7 @@ export default {
     this.camera = null
   },
 
-  ready () {
+  mounted () {
     this.$els.container.appendChild(this.obj.domElement)
     this.animate()
   },

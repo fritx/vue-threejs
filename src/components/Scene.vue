@@ -27,7 +27,7 @@ export default {
     }
   },
 
-  ready () {
+  mounted () {
     this.$dispatch('setScene', this.obj)
   }
 }
