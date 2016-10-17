@@ -1,11 +1,14 @@
 <template>
-  <slot></slot>
+  <div><slot></slot></div>
 </template>
 
 <script>
 import { Object3D } from 'three'
+import { assign } from '../util'
 
 export default {
+  name: 'Object3D',
+
   props: {
     obj: { type: Object3D },
     position: { type: Object }, // { x, y, z }
@@ -14,36 +17,45 @@ export default {
 
   watch: {
     position (v) {
-      if (v) Object.assign(this.obj.position, v)
+      if (v) assign(this._obj.position, v)
     },
     rotation (v) {
-      if (v) Object.assign(this.obj.rotation, v)
+      if (v) assign(this._obj.rotation, v)
     }
   },
 
   data () {
     return {
-      parent: this.$parent.obj instanceof Object3D
-        ? this.$parent.obj : null
+      parent: this.$parent._obj instanceof Object3D
+        ? this.$parent._obj : null
     }
   },
 
   created () {
+    // fix vue 2.0 `Avoid mutating a prop directly since the value will be overwritten
+    // whenever the parent component re-renders. Instead, use a data or computed
+    // property based on the prop's value.`
+    // https://dotdev.co/peeking-into-vue-js-2-part-1-b457e60c88c6#.918arzkow
+    this._obj = this.obj
+
     // this.obj = new Object3D() // holder
-    if (!(this.obj instanceof Object3D)) {
-      this.obj = new Object3D()
+    if (!(this._obj instanceof Object3D)) {
+      this._obj = new Object3D()
     }
-    this.obj.name = this.obj.name || this.constructor.name
+
+    // fix vue 2.0 `this.constructor.name` becomes `VueComponent`
+    // this._obj.name = this._obj.name || this.constructor.name
+    this._obj.name = this._obj.name || this._obj.type
   },
 
-  ready () {
-    if (this.position) Object.assign(this.obj.position, this.position)
-    if (this.rotation) Object.assign(this.obj.rotation, this.rotation)
-    if (this.parent) this.parent.add(this.obj)
+  mounted () {
+    if (this.position) assign(this._obj.position, this.position)
+    if (this.rotation) assign(this._obj.rotation, this.rotation)
+    if (this.parent) this.parent.add(this._obj)
   },
 
   beforeDestroy () {
-    if (this.parent) this.parent.remove(this.obj)
+    if (this.parent) this.parent.remove(this._obj)
   }
 }
 </script>
