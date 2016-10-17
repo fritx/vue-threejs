@@ -1,6 +1,8 @@
 <template>
-  <slot></slot>
-  <div v-el:container></div>
+  <div>
+    <slot></slot>
+    <div v-el:container></div>
+  </div>
 </template>
 
 <script>
