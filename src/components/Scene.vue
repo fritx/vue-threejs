@@ -3,19 +3,19 @@
 </template>
 
 <script>
-import THREE, { Scene } from 'three'
+import * as THREE from 'three'
 import Object3D from './Object3D'
 
 export default {
   mixins: [Object3D],
 
   props: {
-    obj: { type: Scene }
+    obj: { type: THREE.Scene }
   },
 
   created () {
-    if (!(this.obj instanceof Scene)) {
-      this.obj = new Scene()
+    if (!(this.obj instanceof THREE.Scene)) {
+      this.obj = new THREE.Scene()
     }
     this.obj.name = this.obj.name || this.constructor.name
 
