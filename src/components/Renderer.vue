@@ -11,6 +11,8 @@ import { WebGLRenderer } from 'three'
 import bus from '../bus'
 
 export default {
+  name: 'Renderer',
+
   props: {
     size: {
       type: Object, // { w, h }
