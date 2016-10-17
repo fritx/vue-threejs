@@ -9,7 +9,7 @@ module.exports = {
   },
   output: {
     path: config.build.assetsRoot,
-    publicPath: config.build.assetsPublicPath,
+    publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
     filename: '[name].js'
   },
   resolve: {
@@ -55,10 +55,6 @@ module.exports = {
         loader: 'json'
       },
       {
-        test: /\.html$/,
-        loader: 'vue-html'
-      },
-      {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url',
         query: {
@@ -80,6 +76,11 @@ module.exports = {
     formatter: require('eslint-friendly-formatter')
   },
   vue: {
-    loaders: utils.cssLoaders()
+    loaders: utils.cssLoaders(),
+    postcss: [
+      require('autoprefixer')({
+        browsers: ['last 2 versions']
+      })
+    ]
   }
 }
