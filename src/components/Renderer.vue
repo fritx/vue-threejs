@@ -1,13 +1,18 @@
 <template>
-  <slot></slot>
-  <div v-el:container></div>
+  <div>
+    <slot></slot>
+    <div ref="container"></div>
+  </div>
 </template>
 
 <script>
 /* global requestAnimationFrame */
 import { WebGLRenderer } from 'three'
+import bus from '../bus'
 
 export default {
+  name: 'Renderer',
+
   props: {
     size: {
       type: Object, // { w, h }
@@ -18,36 +23,45 @@ export default {
 
   created () {
     this.animate = this.animate.bind(this)
-    if (!(this.obj instanceof WebGLRenderer)) {
-      this.obj = new WebGLRenderer({ antialias: true })
+    this.setScene = this.setScene.bind(this)
+    this.setCamera = this.setCamera.bind(this)
+    this._obj = this.obj
+
+    if (!(this._obj instanceof WebGLRenderer)) {
+      this._obj = new WebGLRenderer({ antialias: true })
     }
-    this.obj.name = this.obj.name || this.constructor.name
-    this.obj.setSize(this.size.w, this.size.h)
+    this._obj.name = this._obj.name || this._obj.type
+    this._obj.setSize(this.size.w, this.size.h)
     this.$root.__rendererSize = this.size // fixme
 
-    this.obj.setClearColor(0x000000)
+    this._obj.setClearColor(0x000000)
     this.scene = null
     this.camera = null
+
+    bus.$on('setScene', this.setScene)
+    bus.$on('setCamera', this.setCamera)
   },
 
-  ready () {
-    this.$els.container.appendChild(this.obj.domElement)
+  destroyed () {
+    bus.$off('setScene', this.setScene)
+    bus.$off('setCamera', this.setCamera)
+  },
+
+  mounted () {
+    this.$refs.container.appendChild(this._obj.domElement)
     this.animate()
   },
 
-  events: {
+  methods: {
     setScene (scene) {
       this.scene = scene
     },
     setCamera (camera) {
       this.camera = camera
-    }
-  },
-
-  methods: {
+    },
     animate () {
       requestAnimationFrame(this.animate)
-      this.obj.render(this.scene, this.camera)
+      this._obj.render(this.scene, this.camera)
     }
   }
 }
