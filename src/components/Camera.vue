@@ -21,7 +21,7 @@ export default {
     this.obj.name = this.obj.name || this.constructor.name
   },
 
-  ready () {
+  mounted () {
     this.$dispatch('setCamera', this.obj)
   }
 }

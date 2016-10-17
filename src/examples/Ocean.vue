@@ -19,7 +19,7 @@ export default {
     this.mesh = this.createOcean()
   },
 
-  ready () {
+  mounted () {
     this.animate()
   },
 

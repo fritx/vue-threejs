@@ -36,7 +36,7 @@ export default {
     this.obj.name = this.obj.name || this.constructor.name
   },
 
-  ready () {
+  mounted () {
     if (this.position) Object.assign(this.obj.position, this.position)
     if (this.rotation) Object.assign(this.obj.rotation, this.rotation)
     if (this.parent) this.parent.add(this.obj)
