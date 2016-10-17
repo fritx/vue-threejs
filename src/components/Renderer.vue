@@ -1,7 +1,7 @@
 <template>
   <div>
     <slot></slot>
-    <div v-el:container></div>
+    <div ref="container"></div>
   </div>
 </template>
 
@@ -35,7 +35,7 @@ export default {
   },
 
   mounted () {
-    this.$els.container.appendChild(this._obj.domElement)
+    this.$refs.container.appendChild(this._obj.domElement)
     this.animate()
   },
 
