@@ -7,6 +7,8 @@ import { Object3D } from 'three'
 import { assign } from '../util'
 
 export default {
+  name: 'Object3D',
+
   props: {
     obj: { type: Object3D },
     position: { type: Object }, // { x, y, z }

@@ -8,6 +8,8 @@ import Object3D from './Object3D'
 import bus from '../bus'
 
 export default {
+  name: 'Scene',
+
   mixins: [Object3D],
 
   props: {
