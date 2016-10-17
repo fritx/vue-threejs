@@ -14,15 +14,17 @@ export default {
   },
 
   created () {
+    this._obj = this.obj
+
     const { w, h } = this.$root.__rendererSize // fixme
-    if (!(this.obj instanceof Camera)) {
-      this.obj = new PerspectiveCamera(75, w / h, 0.1, 1000)
+    if (!(this._obj instanceof Camera)) {
+      this._obj = new PerspectiveCamera(75, w / h, 0.1, 1000)
     }
-    this.obj.name = this.obj.name || this.constructor.name
+    this._obj.name = this._obj.name || this.constructor.name
   },
 
   mounted () {
-    this.$dispatch('setCamera', this.obj)
+    this.$dispatch('setCamera', this._obj)
   }
 }
 </script>

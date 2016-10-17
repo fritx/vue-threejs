@@ -15,36 +15,42 @@ export default {
 
   watch: {
     position (v) {
-      if (v) assign(this.obj.position, v)
+      if (v) assign(this._obj.position, v)
     },
     rotation (v) {
-      if (v) assign(this.obj.rotation, v)
+      if (v) assign(this._obj.rotation, v)
     }
   },
 
   data () {
     return {
-      parent: this.$parent.obj instanceof Object3D
-        ? this.$parent.obj : null
+      parent: this.$parent._obj instanceof Object3D
+        ? this.$parent._obj : null
     }
   },
 
   created () {
+    // fix vue 2.0 `Avoid mutating a prop directly since the value will be overwritten
+    // whenever the parent component re-renders. Instead, use a data or computed
+    // property based on the prop's value.`
+    // https://dotdev.co/peeking-into-vue-js-2-part-1-b457e60c88c6#.918arzkow
+    this._obj = this.obj
+
     // this.obj = new Object3D() // holder
-    if (!(this.obj instanceof Object3D)) {
-      this.obj = new Object3D()
+    if (!(this._obj instanceof Object3D)) {
+      this._obj = new Object3D()
     }
-    this.obj.name = this.obj.name || this.constructor.name
+    this._obj.name = this._obj.name || this.constructor.name
   },
 
   mounted () {
-    if (this.position) assign(this.obj.position, this.position)
-    if (this.rotation) assign(this.obj.rotation, this.rotation)
-    if (this.parent) this.parent.add(this.obj)
+    if (this.position) assign(this._obj.position, this.position)
+    if (this.rotation) assign(this._obj.rotation, this.rotation)
+    if (this.parent) this.parent.add(this._obj)
   },
 
   beforeDestroy () {
-    if (this.parent) this.parent.remove(this.obj)
+    if (this.parent) this.parent.remove(this._obj)
   }
 }
 </script>

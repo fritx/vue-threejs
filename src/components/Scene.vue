@@ -14,21 +14,23 @@ export default {
   },
 
   created () {
-    if (!(this.obj instanceof THREE.Scene)) {
-      this.obj = new THREE.Scene()
+    this._obj = this.obj
+
+    if (!(this._obj instanceof THREE.Scene)) {
+      this._obj = new THREE.Scene()
     }
-    this.obj.name = this.obj.name || this.constructor.name
+    this._obj.name = this._obj.name || this.constructor.name
 
     // for threejs-inspector to work
     // https://github.com/jeromeetienne/threejs-inspector
     if (process.env.NODE_ENV === 'development') {
       window.THREE = THREE
-      window.scene = this.obj
+      window.scene = this._obj
     }
   },
 
   mounted () {
-    this.$dispatch('setScene', this.obj)
+    this.$dispatch('setScene', this._obj)
   }
 }
 </script>
