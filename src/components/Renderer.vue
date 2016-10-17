@@ -8,6 +8,7 @@
 <script>
 /* global requestAnimationFrame */
 import { WebGLRenderer } from 'three'
+import bus from '../bus'
 
 export default {
   props: {
@@ -20,6 +21,8 @@ export default {
 
   created () {
     this.animate = this.animate.bind(this)
+    this.setScene = this.setScene.bind(this)
+    this.setCamera = this.setCamera.bind(this)
     this._obj = this.obj
 
     if (!(this._obj instanceof WebGLRenderer)) {
@@ -32,6 +35,14 @@ export default {
     this._obj.setClearColor(0x000000)
     this.scene = null
     this.camera = null
+
+    bus.$on('setScene', this.setScene)
+    bus.$on('setCamera', this.setCamera)
+  },
+
+  destroyed () {
+    bus.$off('setScene', this.setScene)
+    bus.$off('setCamera', this.setCamera)
   },
 
   mounted () {
@@ -39,16 +50,13 @@ export default {
     this.animate()
   },
 
-  events: {
+  methods: {
     setScene (scene) {
       this.scene = scene
     },
     setCamera (camera) {
       this.camera = camera
-    }
-  },
-
-  methods: {
+    },
     animate () {
       requestAnimationFrame(this.animate)
       this._obj.render(this.scene, this.camera)

@@ -5,6 +5,7 @@
 <script>
 import * as THREE from 'three'
 import Object3D from './Object3D'
+import bus from '../bus'
 
 export default {
   mixins: [Object3D],
@@ -30,7 +31,7 @@ export default {
   },
 
   mounted () {
-    this.$dispatch('setScene', this._obj)
+    bus.$emit('setScene', this._obj)
   }
 }
 </script>
