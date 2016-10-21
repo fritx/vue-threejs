@@ -48,12 +48,17 @@ export default {
     this._obj.name = this._obj.name || this._obj.type
   },
 
+  // ready => mounted + (nextTick?)
+  // http://rc.vuejs.org/guide/migration.html#ready-deprecated
   mounted () {
     if (this.position) assign(this._obj.position, this.position)
     if (this.rotation) assign(this._obj.rotation, this.rotation)
     if (this.parent) this.parent.add(this._obj)
   },
 
+  // detached => destroyed + (nextTick?)
+  // http://rc.vuejs.org/guide/migration.html#detached-deprecated
+  // but we use beforeDestroy to clean up
   beforeDestroy () {
     if (this.parent) this.parent.remove(this._obj)
   }

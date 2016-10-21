@@ -42,14 +42,17 @@ export default {
     bus.$on('setCamera', this.setCamera)
   },
 
-  destroyed () {
-    bus.$off('setScene', this.setScene)
-    bus.$off('setCamera', this.setCamera)
-  },
-
   mounted () {
     this.$refs.container.appendChild(this._obj.domElement)
     this.animate()
+  },
+
+  // It's good to clean up event listeners before
+  // a component is destroyed.
+  // http://rc.vuejs.org/guide/migration.html#ready-deprecated
+  breforeDestroy () {
+    bus.$off('setScene', this.setScene)
+    bus.$off('setCamera', this.setCamera)
   },
 
   methods: {
