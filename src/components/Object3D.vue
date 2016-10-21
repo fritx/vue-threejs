@@ -26,6 +26,7 @@ export default {
 
   data () {
     return {
+      _obj: null,
       parent: this.$parent._obj instanceof Object3D
         ? this.$parent._obj : null
     }
