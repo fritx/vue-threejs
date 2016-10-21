@@ -1,7 +1,3 @@
-<template>
-  <object3d :obj="mesh"></object3d>
-</template>
-
 <script>
 /* global requestAnimationFrame */
 import * as THREE from 'three'
@@ -16,7 +12,7 @@ export default {
   created () {
     this.animate = this.animate.bind(this)
     this.clock = new THREE.Clock()
-    this.mesh = this.createOcean()
+    this._obj = this.createOcean()
   },
 
   mounted () {
@@ -25,9 +21,9 @@ export default {
 
   methods: {
     createOcean () {
-      const geometry = this.geometry = new THREE.PlaneGeometry(10000, 10000, 40, 40)
+      const geometry = new THREE.PlaneGeometry(10000, 10000, 40, 40)
       geometry.rotateX(-Math.PI / 2)
-      for (var i = 0, l = geometry.vertices.length; i < l; i++) {
+      for (let i = 0, l = geometry.vertices.length; i < l; i++) {
         geometry.vertices[ i ].y = 10 * Math.sin(i / 2)
       }
 
@@ -44,10 +40,10 @@ export default {
     animate () {
       requestAnimationFrame(this.animate)
       const time = this.clock.getElapsedTime() * 5
-      for (var i = 0, l = this.geometry.vertices.length; i < l; i++) {
-        this.geometry.vertices[i].y = 10 * Math.sin(i / 5 + (time + i) / 7)
+      for (let i = 0, l = this._obj.geometry.vertices.length; i < l; i++) {
+        this._obj.geometry.vertices[i].y = 10 * Math.sin(i / 5 + (time + i) / 7)
       }
-      this.mesh.geometry.verticesNeedUpdate = true
+      this._obj.geometry.verticesNeedUpdate = true
     }
   }
 }
