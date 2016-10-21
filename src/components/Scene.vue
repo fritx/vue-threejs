@@ -1,7 +1,3 @@
-<template>
-  <div><slot></slot></div>
-</template>
-
 <script>
 import * as THREE from 'three'
 import Object3D from './Object3D'
