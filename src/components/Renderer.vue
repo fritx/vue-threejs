@@ -7,7 +7,10 @@
 
 <script>
 /* global requestAnimationFrame */
+/* eslint-disable no-duplicate-imports */
 import { WebGLRenderer } from 'three'
+import * as THREE from 'three'
+
 import bus from '../bus'
 
 export default {
@@ -19,6 +22,12 @@ export default {
       required: true
     },
     obj: { type: WebGLRenderer }
+  },
+
+  data () {
+    return {
+      _obj: null
+    }
   },
 
   created () {
@@ -58,6 +67,13 @@ export default {
   methods: {
     setScene (scene) {
       this.scene = scene
+
+      // for threejs-inspector to work
+      // https://github.com/jeromeetienne/threejs-inspector
+      if (process.env.NODE_ENV === 'development') {
+        window.THREE = THREE
+        window.scene = scene
+      }
     },
     setCamera (camera) {
       this.camera = camera

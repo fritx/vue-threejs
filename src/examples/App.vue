@@ -15,6 +15,8 @@
   import Ocean from './Ocean'
 
   export default {
+    name: 'App',
+
     components: { Ocean },
 
     data () {
