@@ -59,7 +59,7 @@ export default {
   // It's good to clean up event listeners before
   // a component is destroyed.
   // http://rc.vuejs.org/guide/migration.html#ready-deprecated
-  breforeDestroy () {
+  beforeDestroy () {
     bus.$off('setScene', this.setScene)
     bus.$off('setCamera', this.setCamera)
   },
