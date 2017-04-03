@@ -31,9 +31,6 @@ export default {
   },
 
   created () {
-    this.animate = this.animate.bind(this)
-    this.setScene = this.setScene.bind(this)
-    this.setCamera = this.setCamera.bind(this)
     this._obj = this.obj
 
     if (!(this._obj instanceof WebGLRenderer)) {

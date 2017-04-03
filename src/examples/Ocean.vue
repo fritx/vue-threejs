@@ -10,7 +10,6 @@ export default {
   mixins: [Object3D],
 
   created () {
-    this.animate = this.animate.bind(this)
     this.clock = new THREE.Clock()
     this._obj = this.createOcean()
   },
