@@ -26,21 +26,21 @@ export default {
 
   data () {
     return {
-      _obj: null
+      curObj: null
     }
   },
 
   created () {
-    this._obj = this.obj
+    this.curObj = this.obj
 
-    if (!(this._obj instanceof WebGLRenderer)) {
-      this._obj = new WebGLRenderer({ antialias: true })
+    if (!(this.curObj instanceof WebGLRenderer)) {
+      this.curObj = new WebGLRenderer({ antialias: true })
     }
-    this._obj.name = this._obj.name || this._obj.type
-    this._obj.setSize(this.size.w, this.size.h)
+    this.curObj.name = this.curObj.name || this.curObj.type
+    this.curObj.setSize(this.size.w, this.size.h)
     this.$root.__rendererSize = this.size // fixme
 
-    this._obj.setClearColor(0x000000)
+    this.curObj.setClearColor(0x000000)
     this.scene = null
     this.camera = null
 
@@ -49,7 +49,7 @@ export default {
   },
 
   mounted () {
-    this.$refs.container.appendChild(this._obj.domElement)
+    this.$refs.container.appendChild(this.curObj.domElement)
     this.animate()
   },
 
@@ -77,7 +77,7 @@ export default {
     },
     animate () {
       requestAnimationFrame(this.animate)
-      this._obj.render(this.scene, this.camera)
+      this.curObj.render(this.scene, this.camera)
     }
   }
 }

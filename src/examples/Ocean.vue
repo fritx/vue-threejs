@@ -11,7 +11,7 @@ export default {
 
   created () {
     this.clock = new THREE.Clock()
-    this._obj = this.createOcean()
+    this.curObj = this.createOcean()
   },
 
   mounted () {
@@ -39,10 +39,10 @@ export default {
     animate () {
       requestAnimationFrame(this.animate)
       const time = this.clock.getElapsedTime() * 5
-      for (let i = 0, l = this._obj.geometry.vertices.length; i < l; i++) {
-        this._obj.geometry.vertices[i].y = 10 * Math.sin(i / 5 + (time + i) / 7)
+      for (let i = 0, l = this.curObj.geometry.vertices.length; i < l; i++) {
+        this.curObj.geometry.vertices[i].y = 10 * Math.sin(i / 5 + (time + i) / 7)
       }
-      this._obj.geometry.verticesNeedUpdate = true
+      this.curObj.geometry.verticesNeedUpdate = true
     }
   }
 }

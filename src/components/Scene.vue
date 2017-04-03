@@ -1,28 +1,26 @@
 <script>
-import * as THREE from 'three'
+import { Scene } from 'three'
 import Object3D from './Object3D'
 import bus from '../bus'
 
 export default {
   name: 'Scene',
-
   mixins: [Object3D],
 
   props: {
-    obj: { type: THREE.Scene }
+    obj: { type: Scene }
   },
 
   created () {
-    this._obj = this.obj
-
-    if (!(this._obj instanceof THREE.Scene)) {
-      this._obj = new THREE.Scene()
+    this.curObj = this.obj
+    if (!(this.curObj instanceof Scene)) {
+      this.curObj = new Scene()
     }
-    this._obj.name = this._obj.name || this._obj.type
+    this.curObj.name = this.curObj.name || this.curObj.type
   },
 
   mounted () {
-    bus.$emit('setScene', this._obj)
+    bus.$emit('setScene', this.curObj)
   }
 }
 </script>

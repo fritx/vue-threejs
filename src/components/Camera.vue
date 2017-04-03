@@ -5,7 +5,6 @@ import bus from '../bus'
 
 export default {
   name: 'Camera',
-
   mixins: [Object3D],
 
   props: {
@@ -13,17 +12,17 @@ export default {
   },
 
   created () {
-    this._obj = this.obj
+    this.curObj = this.obj
 
     const { w, h } = this.$root.__rendererSize // fixme
-    if (!(this._obj instanceof Camera)) {
-      this._obj = new PerspectiveCamera(75, w / h, 0.1, 1000)
+    if (!(this.curObj instanceof Camera)) {
+      this.curObj = new PerspectiveCamera(75, w / h, 0.1, 1000)
     }
-    this._obj.name = this._obj.name || this._obj.type
+    this.curObj.name = this.curObj.name || this.curObj.type
   },
 
   mounted () {
-    bus.$emit('setCamera', this._obj)
+    bus.$emit('setCamera', this.curObj)
   }
 }
 </script>
