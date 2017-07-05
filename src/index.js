@@ -6,9 +6,13 @@ import Camera from './components/Camera'
 // todo: automatic build script
 export default {
   install (Vue) {
-    Vue.component('renderer', Renderer)
+    Vue.component(Renderer.name, Renderer)
+    Vue.component(Scene.name, Scene)
+    Vue.component(Camera.name, Camera)
+
+    // name 'object3d' is required,
+    // or it would be parsed to 'object-3-d' somewhere else
+    Vue.component(Object3D.name, Object3D)
     Vue.component('object3d', Object3D)
-    Vue.component('scene', Scene)
-    Vue.component('camera', Camera)
   }
 }
