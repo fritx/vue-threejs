@@ -38,8 +38,10 @@ export default {
     }
     this.curObj.name = this.curObj.name || this.curObj.type
     this.curObj.setSize(this.size.w, this.size.h)
-    this.$root.__rendererSize = this.size // fixme
 
+    // fixme: better solution for global vars
+    this.$root.__rendererSize = this.size
+    this.$root.__rendererDom = this.curObj.domElement
     this.curObj.setClearColor(0x000000)
     this.scene = null
     this.camera = null
