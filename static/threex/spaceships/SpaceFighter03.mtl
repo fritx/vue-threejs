@@ -1,0 +1,14 @@
+# Blender MTL File: 'None'
+# Material Count: 1
+newmtl VMtl01.002_F03_512.JPG
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.398431 0.398431 0.398431
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 2
+#map_Kd Free-game-models-collection/spaceships/SpaceFighter03/F03_512.JPG
+map_Kd F03_512.jpg
+
+
