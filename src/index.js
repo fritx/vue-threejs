@@ -3,6 +3,7 @@ import Object3D from './components/Object3D'
 import Light from './components/Light'
 import Scene from './components/Scene'
 import Camera from './components/Camera'
+import AudioListener from './components/AudioListener'
 
 // todo: automatic build script
 export default {
@@ -10,6 +11,7 @@ export default {
     Vue.component(Renderer.name, Renderer)
     Vue.component(Scene.name, Scene)
     Vue.component(Camera.name, Camera)
+    Vue.component(AudioListener.name, AudioListener)
     Vue.component(Light.name, Light)
 
     // name 'object3d' is required,

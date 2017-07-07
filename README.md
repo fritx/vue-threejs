@@ -25,8 +25,9 @@ Vue.use(VueThreejs)
 **Roadmap**
 
 - [ ] Basic components
-  - [x] light
-  - [ ] controls
+  - [x] renderer/scene/camera/listener
+  - [x] object3d/light/audio
+  - [ ] controls/mesh/more
 - [ ] Watch for props change
   - [x] position/rotation
   - [ ] obj/more
