@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import PositionalAudio from '../components/PositionalAudio'
-import OrbitControls from '../components/OrbitControls'
+import PositionalAudio from '@/components/PositionalAudio'
+import OrbitControls from '@/components/OrbitControls'
 import Ocean from './Ocean'
 import SF03 from './SF03'
 
