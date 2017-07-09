@@ -1,7 +1,7 @@
 <script>
 /* global requestAnimationFrame */
 import * as THREE from 'three'
-import Object3D from '../components/Object3D'
+import Object3D from '@/components/Object3D'
 
 // http://threejs.org/examples/#webgl_geometry_dynamic
 export default {
