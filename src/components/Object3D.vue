@@ -32,7 +32,7 @@ export default {
 
   computed: {
     parentObj () {
-      const { curObj: parentObj } = this.$parent
+      const { curObj: parentObj } = this.$parent || {}
       if (parentObj instanceof Object3D) {
         return parentObj
       }
