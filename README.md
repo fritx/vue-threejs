@@ -36,6 +36,12 @@ Vue.use(VueThreejs)
   - [x] animation-component-plain
   - [x] animation-mixin
   - [ ] animation queue/container
+- [ ] Unit test
+  - [x] Karma/Mocha/Phantom
+  - [ ] Electron/Ava
+- [ ] Build commands
+  - [x] example dist
+  - [ ] library dist
 
 **Study Notes**
 
