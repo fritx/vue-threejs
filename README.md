@@ -17,6 +17,7 @@ Vue.use(VueThreejs)
     <scene>
       <camera :position="{ z: 15 }"></camera>
       <object3d :obj="mesh" :position="{ y: -200 }"></object3d>
+      <animation :fn="animate" :speed="3"></animation>
     </scene>
   </renderer>
 </template>
@@ -26,16 +27,14 @@ Vue.use(VueThreejs)
 
 - [ ] Basic components
   - [x] renderer/scene/camera/listener
-  - [x] object3d/light/audio
+  - [x] object3d/light/audio/animation
   - [ ] controls/mesh/more
 - [ ] Watch for props change
   - [x] position/rotation
   - [ ] obj/more
-- [ ] Better animation mechanism
-  - [x] animation-component
-  - [x] animation-component-plain
-  - [x] animation-mixin
-  - [ ] animation queue/container
+- [ ] Animation
+  - [x] component/animate/speed/paused
+  - [ ] blocked/global-control
 - [ ] Unit test
   - [x] Karma/Mocha/Phantom
   - [ ] Electron/Ava
