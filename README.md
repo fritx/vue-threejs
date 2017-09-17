@@ -35,9 +35,12 @@ Vue.use(VueThreejs)
 - [ ] Animation
   - [x] component/animate/speed/paused
   - [ ] blocked/global-control
+- [ ] Physical engine
+  - [x] movement(a/v/pos/ra/rv/rot)
+  - [ ] mass(m/F)/gravity(G/r)/collision
 - [ ] Unit test
-  - [x] Karma/Mocha/Phantom
-  - [ ] Electron/Ava
+  - [x] karma/mocha/phantom
+  - [ ] avoriaz/ava
 - [ ] Build commands
   - [x] example dist
   - [ ] library dist
