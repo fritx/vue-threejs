@@ -36,7 +36,7 @@ export default {
 
   beforeDestroy () {
     let index = this.movemVms.indexOf(this)
-    if (index > 0) this.movemVms.splice(index, 1)
+    if (index > -1) this.movemVms.splice(index, 1)
   }
 }
 </script>

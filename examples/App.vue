@@ -17,13 +17,18 @@
       <positional-audio :position="{ y: 10 }" url="static/Project_Utopia.ogg"></positional-audio>
 
       <movement-system :key="movemSysKey">
-        <movement-object :rv0="{ x: 2, y: 2 }" :v0="{ x: 10 }" :a="{ x: -3, y: -2 }">
-          <cube texture="cobblestone" :size="1"></cube>
-        </movement-object>
-        <movement-object :rv0="{ x: 2, z: 2 }" :v0="{ z: 20 }" :a="{ y: -1, z: -8 }">
-          <cube texture="diamond" :size="1.2"></cube>
-        </movement-object>
-        <movement-object :rv0="{ x: 2, z: 2 }" :v0="{ x: 15, z: -20 }" :a="{ x: -6, y: .5, z: 6 }">
+        <mass-system>
+          <mass-object :rv0="{ x: 2, y: 2 }" :v0="{ x: 10 }"
+              :f="{ x: -3, y: -2 }" :m="1">
+            <cube texture="cobblestone" :size="1"></cube>
+          </mass-object>
+          <mass-object :rv0="{ x: 2, z: 2 }" :v0="{ z: 20 }"
+              :f="{ y: -1, z: -8 }" :m="1.2">
+            <cube texture="diamond" :size="1.2"></cube>
+          </mass-object>
+        </mass-system>
+        <movement-object :rv0="{ x: 2, z: 2 }" :v0="{ x: 15, z: -20 }"
+            :a="{ x: -6, y: .5, z: 6 }">
           <cube texture="redwool" :size="1.1"></cube>
         </movement-object>
       </movement-system>
@@ -36,6 +41,8 @@ import PositionalAudio from '@/components/PositionalAudio'
 import OrbitControls from '@/components/OrbitControls'
 import MovementSystem from '@/physics/MovementSystem'
 import MovementObject from '@/physics/MovementObject'
+import MassSystem from '@/physics/MassSystem'
+import MassObject from '@/physics/MassObject'
 import Ocean from './Ocean'
 import SF03 from './SF03'
 import Cube from './Cube'
@@ -45,6 +52,8 @@ export default {
   components: {
     MovementSystem,
     MovementObject,
+    MassSystem,
+    MassObject,
     PositionalAudio,
     OrbitControls,
     Cube,

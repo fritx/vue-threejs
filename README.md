@@ -23,6 +23,23 @@ Vue.use(VueThreejs)
 </template>
 ```
 
+**Physics**
+
+```vue
+<movement-system :key="movemSysKey">
+  <mass-system>
+    <mass-object :rv0="{ x: 2, y: 2 }" :v0="{ x: 10 }"
+        :f="{ x: -3, y: -2 }" :m="1">
+      <cube texture="cobblestone" :size="1"></cube>
+    </mass-object>
+    <mass-object :rv0="{ x: 2, z: 2 }" :v0="{ z: 20 }"
+        :f="{ y: -1, z: -8 }" :m="1.2">
+      <cube texture="diamond" :size="1.2"></cube>
+    </mass-object>
+  </mass-system>
+</movement-system>
+```
+
 **Roadmap**
 
 - [ ] Basic components
@@ -36,8 +53,8 @@ Vue.use(VueThreejs)
   - [x] component/animate/speed/paused
   - [ ] blocked/global-control
 - [ ] Physical engine
-  - [x] movement(a/v/pos/ra/rv/rot)
-  - [ ] mass(m/F)/gravity(G/r)/collision
+  - [x] movement(a/v/pos/ra/rv/rot)/mass(m/F)
+  - [ ] gravity(G/r)/collision
 - [ ] Unit test
   - [x] karma/mocha/phantom
   - [ ] avoriaz/ava

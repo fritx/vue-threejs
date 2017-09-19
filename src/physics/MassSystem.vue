@@ -11,13 +11,13 @@ import Object3D from '@/components/Object3D'
 import { $vec } from '@/util'
 
 export default {
-  name: 'movement-system',
+  name: 'mass-system',
   mixins: [Object3D],
   components: { Animation },
 
   provide () {
     return {
-      movemVms: this.vms
+      massVms: this.vms
     }
   },
 
@@ -25,19 +25,12 @@ export default {
     return { vms: [] }
   },
 
+  // todo: via HTML native events
   methods: {
     animate (tt, dt) {
       this.vms.forEach(vm => {
-        // position
-        let dv = $vec.multiplyScalar(vm.a, dt)
-        vm.v = $vec.add(vm.v, dv)
-        let dx = $vec.multiplyScalar(vm.v, dt)
-        vm.pos = $vec.add(vm.pos, dx)
-        // rotation
-        let drv = $vec.multiplyScalar(vm.ra, dt)
-        vm.rv = $vec.add(vm.rv, drv)
-        let drx = $vec.multiplyScalar(vm.rv, dt)
-        vm.rot = $vec.add(vm.rot, drx)
+        // acc
+        vm.a = $vec.multiplyScalar(vm.sumF, 1 / vm.m)
       })
     }
   }
