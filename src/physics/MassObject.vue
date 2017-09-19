@@ -8,10 +8,9 @@ export default {
   mixins: [MovementObject],
 
   // Vue provide/inject not inherited??
-  inject: [
-    ...MovementObject.inject,
-    'massVms'
-  ],
+  // inject: [
+  //   ...MovementObject.inject
+  // ],
 
   props: {
     f: Object,
@@ -20,12 +19,14 @@ export default {
 
   data () {
     return {
-      a: null,
       innerF: []
     }
   },
 
   computed: {
+    a () {
+      return $vec.multiplyScalar(this.sumF, 1 / this.m)
+    },
     sumF () {
       let { f, innerF } = this
       f = Array.isArray(f) ? f : [f]
@@ -42,15 +43,6 @@ export default {
   // https://stackoverflow.com/questions/45680047/vuejs-extend-component-remove-parents-property
   beforeCreate () {
     Vue.delete(this.$options.props, 'a')
-  },
-
-  created () {
-    this.massVms.push(this)
-  },
-
-  beforeDestroy () {
-    let index = this.massVms.indexOf(this)
-    if (index > -1) this.massVms.splice(index, 1)
   }
 }
 </script>
