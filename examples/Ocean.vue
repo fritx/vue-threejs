@@ -14,7 +14,6 @@ import Object3D from '@/components/Object3D'
 export default {
   name: 'Ocean',
   mixins: [Object3D],
-  components: { Object3D },
 
   data () {
     return { ocean: null }

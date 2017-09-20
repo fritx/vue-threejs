@@ -9,7 +9,6 @@ import * as THREE from 'three'
 export default {
   name: 'cube',
   mixins: [Object3D],
-  components: { Object3D },
 
   props: { size: Number, texture: String },
 
