@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Object3D from '@/components/Object3D'
+import { expect } from 'chai'
 
 // vue guide: Unit Testing
 // https://vuejs.org/v2/guide/unit-testing.html

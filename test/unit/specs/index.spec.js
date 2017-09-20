@@ -1,0 +1,5 @@
+import '@/'
+
+test.skip(() => {
+
+})

@@ -7,9 +7,9 @@
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
-    "lint": "eslint --ext .js,.vue src test/unit/specs",
-    "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
-    "test": "npm run unit"
+    "lint": "eslint --ext .js,.vue src test",
+    "unit": "jest --coverage",
+    "test": "npm run lint && npm run unit"
   },
   "peerDependencies": {
     "three": ">=0.81.2",
@@ -19,8 +19,9 @@
     "autoprefixer": "^6.7.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",
+    "babel-jest": "^21.0.2",
     "babel-loader": "^6.2.10",
-    "babel-plugin-istanbul": "^4.1.1",
+    "babel-plugin-module-resolver": "^2.7.1",
     "babel-plugin-transform-runtime": "^6.22.0",
     "babel-preset-env": "^1.3.2",
     "babel-preset-stage-2": "^6.22.0",
@@ -29,7 +30,6 @@
     "chalk": "^1.1.3",
     "connect-history-api-fallback": "^1.3.0",
     "copy-webpack-plugin": "^4.0.1",
-    "cross-env": "^4.0.0",
     "css-loader": "^0.28.0",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^6.2.1",
@@ -45,22 +45,11 @@
     "friendly-errors-webpack-plugin": "^1.1.3",
     "html-webpack-plugin": "^2.28.0",
     "http-proxy-middleware": "^0.17.3",
-    "inject-loader": "^3.0.0",
-    "karma": "^1.4.1",
-    "karma-coverage": "^1.1.1",
-    "karma-mocha": "^1.3.0",
-    "karma-phantomjs-launcher": "^1.0.2",
-    "karma-phantomjs-shim": "^1.4.0",
-    "karma-sinon-chai": "^1.3.1",
-    "karma-sourcemap-loader": "^0.3.7",
-    "karma-spec-reporter": "0.0.30",
-    "karma-webpack": "^2.0.2",
-    "lolex": "^1.5.2",
-    "mocha": "^3.2.0",
+    "jest": "^21.1.0",
+    "jest-vue": "^0.5.6",
     "opn": "^4.0.2",
     "optimize-css-assets-webpack-plugin": "^1.3.0",
     "ora": "^1.2.0",
-    "phantomjs-prebuilt": "^2.1.14",
     "rimraf": "^2.6.0",
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",
@@ -86,5 +75,16 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "vue"
+    ],
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
+      ".*\\.(vue)$": "<rootDir>/node_modules/jest-vue"
+    },
+    "mapCoverage": true
+  }
 }
