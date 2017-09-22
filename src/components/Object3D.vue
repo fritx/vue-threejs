@@ -9,6 +9,14 @@ import { assign } from '../util'
 export default {
   name: 'Object3D',
 
+  provide () {
+    return {
+      parentObj: this.curObj
+    }
+  },
+
+  inject: ['parentObj'],
+
   props: {
     obj: { type: Object3D },
     position: { type: Object }, // { x, y, z }
@@ -41,16 +49,6 @@ export default {
     curObj.name = curObj.name || curObj.type
 
     return { curObj }
-  },
-
-  computed: {
-    parentObj () {
-      const { curObj: parentObj } = this.$parent || {}
-      if (parentObj instanceof Object3D) {
-        return parentObj
-      }
-      return null
-    }
   },
 
   // ready => mounted + (nextTick?)
