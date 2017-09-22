@@ -7,14 +7,16 @@
 
 <script>
 /* global requestAnimationFrame */
-/* eslint-disable no-duplicate-imports */
 import { WebGLRenderer } from 'three'
-import * as THREE from 'three'
-
-import bus from '../bus'
 
 export default {
   name: 'Renderer',
+
+  provide () {
+    return {
+      global: this.global
+    }
+  },
 
   props: {
     size: {
@@ -34,16 +36,12 @@ export default {
     curObj.setSize(this.size.w, this.size.h)
 
     // fixme: better solution for global vars
-    this.$root.__rendererSize = this.size
-    this.$root.__rendererDom = curObj.domElement
+    let global = {}
+    global.rendererSize = this.size
+    global.rendererDom = curObj.domElement
     curObj.setClearColor(0x000000)
-    this.scene = null
-    this.camera = null
 
-    bus.$on('setScene', this.setScene)
-    bus.$on('setCamera', this.setCamera)
-
-    return { curObj }
+    return { curObj, global }
   },
 
   mounted () {
@@ -51,31 +49,10 @@ export default {
     this.animate()
   },
 
-  // It's good to clean up event listeners before
-  // a component is destroyed.
-  // http://rc.vuejs.org/guide/migration.html#ready-deprecated
-  beforeDestroy () {
-    bus.$off('setScene', this.setScene)
-    bus.$off('setCamera', this.setCamera)
-  },
-
   methods: {
-    setScene (scene) {
-      this.scene = scene
-
-      // for threejs-inspector to work
-      // https://github.com/jeromeetienne/threejs-inspector
-      if (process.env.NODE_ENV === 'development') {
-        window.THREE = THREE
-        window.scene = scene
-      }
-    },
-    setCamera (camera) {
-      this.camera = camera
-    },
     animate () {
       requestAnimationFrame(this.animate)
-      this.curObj.render(this.scene, this.camera)
+      this.curObj.render(this.global.scene, this.global.camera)
     }
   }
 }

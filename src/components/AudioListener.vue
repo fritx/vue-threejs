@@ -11,9 +11,14 @@ export default {
   mixins: [Object3D],
   components: { Object3D },
 
+  inject: [
+    ...Object3D.inject,
+    'global'
+  ],
+
   data () {
     let listener = new AudioListener()
-    this.$root.__audioListener = listener // fixme
+    this.global.audioListener = listener // fixme
     return { listener }
   }
 }

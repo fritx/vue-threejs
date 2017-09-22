@@ -16,7 +16,7 @@
       <sf03 :position="{ y: 10 }"></sf03>
       <positional-audio :position="{ y: 10 }" url="static/Project_Utopia.ogg"></positional-audio>
 
-      <movement-system>
+      <movement-system :key="movemSysKey">
         <mass-object :rv0="{ x: 2, y: 2 }" :v0="{ x: 10 }"
             :f="{ x: -3, y: -2 }" :m="1">
           <cube texture="cobblestone" :size="1"></cube>
