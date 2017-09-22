@@ -25,29 +25,25 @@ export default {
   },
 
   data () {
-    return {
-      curObj: null
-    }
-  },
+    let curObj = this.obj
 
-  created () {
-    this.curObj = this.obj
-
-    if (!(this.curObj instanceof WebGLRenderer)) {
-      this.curObj = new WebGLRenderer({ antialias: true })
+    if (!(curObj instanceof WebGLRenderer)) {
+      curObj = new WebGLRenderer({ antialias: true })
     }
-    this.curObj.name = this.curObj.name || this.curObj.type
-    this.curObj.setSize(this.size.w, this.size.h)
+    curObj.name = curObj.name || curObj.type
+    curObj.setSize(this.size.w, this.size.h)
 
     // fixme: better solution for global vars
     this.$root.__rendererSize = this.size
-    this.$root.__rendererDom = this.curObj.domElement
-    this.curObj.setClearColor(0x000000)
+    this.$root.__rendererDom = curObj.domElement
+    curObj.setClearColor(0x000000)
     this.scene = null
     this.camera = null
 
     bus.$on('setScene', this.setScene)
     bus.$on('setCamera', this.setCamera)
+
+    return { curObj }
   },
 
   mounted () {

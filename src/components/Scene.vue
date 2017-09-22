@@ -11,12 +11,13 @@ export default {
     obj: { type: Scene }
   },
 
-  created () {
-    this.curObj = this.obj
-    if (!(this.curObj instanceof Scene)) {
-      this.curObj = new Scene()
+  data () {
+    let curObj = this.obj
+    if (!(curObj instanceof Scene)) {
+      curObj = new Scene()
     }
-    this.curObj.name = this.curObj.name || this.curObj.type
+    curObj.name = curObj.name || curObj.type
+    return { curObj }
   },
 
   mounted () {

@@ -25,9 +25,22 @@ export default {
   },
 
   data () {
-    return {
-      curObj: null
+    // fix vue 2.0 `Avoid mutating a prop directly since the value will be overwritten
+    // whenever the parent component re-renders. Instead, use a data or computed
+    // property based on the prop's value.`
+    // https://dotdev.co/peeking-into-vue-js-2-part-1-b457e60c88c6#.918arzkow
+    let curObj = this.obj
+
+    // this.obj = new Object3D() // holder
+    if (!(curObj instanceof Object3D)) {
+      curObj = new Object3D()
     }
+
+    // fix vue 2.0 `this.constructor.name` becomes `VueComponent`
+    // curObj.name = curObj.name || this.constructor.name
+    curObj.name = curObj.name || curObj.type
+
+    return { curObj }
   },
 
   computed: {
@@ -38,23 +51,6 @@ export default {
       }
       return null
     }
-  },
-
-  created () {
-    // fix vue 2.0 `Avoid mutating a prop directly since the value will be overwritten
-    // whenever the parent component re-renders. Instead, use a data or computed
-    // property based on the prop's value.`
-    // https://dotdev.co/peeking-into-vue-js-2-part-1-b457e60c88c6#.918arzkow
-    this.curObj = this.obj
-
-    // this.obj = new Object3D() // holder
-    if (!(this.curObj instanceof Object3D)) {
-      this.curObj = new Object3D()
-    }
-
-    // fix vue 2.0 `this.constructor.name` becomes `VueComponent`
-    // this.curObj.name = this.curObj.name || this.constructor.name
-    this.curObj.name = this.curObj.name || this.curObj.type
   },
 
   // ready => mounted + (nextTick?)

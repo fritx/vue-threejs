@@ -16,9 +16,10 @@ export default {
     intensity: Number
   },
 
-  created () {
+  data () {
     let { hex, intensity } = this
-    this.light = new THREE.DirectionalLight(hex, intensity)
+    let light = new THREE.DirectionalLight(hex, intensity)
+    return { light }
   }
 }
 </script>
