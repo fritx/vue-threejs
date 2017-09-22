@@ -12,7 +12,10 @@ export default {
   mixins: [Object3D],
   components: { Object3D },
 
-  inject: ['movemVms'],
+  inject: [
+    ...Object3D.inject,
+    'movemVms'
+  ],
 
   props: {
     a: Object,

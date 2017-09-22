@@ -1,28 +1,34 @@
 <script>
 import { Camera, PerspectiveCamera } from 'three'
 import Object3D from './Object3D'
-import bus from '../bus'
 
 export default {
   name: 'Camera',
   mixins: [Object3D],
 
+  inject: [
+    ...Object3D.inject,
+    'global'
+  ],
+
   props: {
     obj: { type: Camera }
   },
 
-  created () {
-    this.curObj = this.obj
+  data () {
+    let curObj = this.obj
 
-    const { w, h } = this.$root.__rendererSize // fixme
-    if (!(this.curObj instanceof Camera)) {
-      this.curObj = new PerspectiveCamera(75, w / h, 0.1, 1000)
+    const { w, h } = this.global.rendererSize // fixme
+    if (!(curObj instanceof Camera)) {
+      curObj = new PerspectiveCamera(75, w / h, 0.1, 1000)
     }
-    this.curObj.name = this.curObj.name || this.curObj.type
+    curObj.name = curObj.name || curObj.type
+
+    return { curObj }
   },
 
   mounted () {
-    bus.$emit('setCamera', this.curObj)
+    this.global.camera = this.curObj
   }
 }
 </script>

@@ -15,6 +15,11 @@ export default {
   mixins: [Object3D],
   components: { Object3D },
 
+  inject: [
+    ...Object3D.inject,
+    'global'
+  ],
+
   data () {
     return {
       controls: null,
@@ -24,7 +29,7 @@ export default {
   },
 
   mounted () {
-    let domElement = this.$root.__rendererDom // fixme
+    let domElement = this.global.rendererDom // fixme
     this.controls = new _OrbitControls(this.curObj, domElement)
     this.timer = new Clock()
     this.frame = this.animate()
