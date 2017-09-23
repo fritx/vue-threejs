@@ -19,16 +19,29 @@ export default {
 
   props: {
     obj: { type: Object3D },
+    scale: { type: [Object, Number] }, // { x, y, z }
     position: { type: Object }, // { x, y, z }
     rotation: { type: Object } // { x, y, z }
   },
 
   watch: {
-    position (v) {
-      assign(this.curObj.position, v)
+    scale: {
+      deep: true,
+      handler (v) {
+        this.setScale(v)
+      }
     },
-    rotation (v) {
-      assign(this.curObj.rotation, v)
+    position: {
+      deep: true,
+      handler (v) {
+        assign(this.curObj.position, v)
+      }
+    },
+    rotation: {
+      deep: true,
+      handler (v) {
+        assign(this.curObj.rotation, v)
+      }
     }
   },
 
@@ -54,6 +67,7 @@ export default {
   // ready => mounted + (nextTick?)
   // http://rc.vuejs.org/guide/migration.html#ready-deprecated
   mounted () {
+    this.setScale(this.scale)
     assign(this.curObj.position, this.position)
     assign(this.curObj.rotation, this.rotation)
     if (this.parentObj) {
@@ -67,6 +81,15 @@ export default {
   beforeDestroy () {
     if (this.parentObj) {
       this.parentObj.remove(this.curObj)
+    }
+  },
+
+  methods: {
+    setScale (v) {
+      if (v && typeof v === 'number') {
+        v = { x: v, y: v, z: v }
+      }
+      assign(this.curObj.scale, v)
     }
   }
 }
