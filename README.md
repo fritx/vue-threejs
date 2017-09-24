@@ -1,8 +1,10 @@
 # vue-threejs
 
-> \[WIP\] [Vue][vue] bindings for [Three.js][threejs]
+> \[WIP\] [Three.js][threejs] bindings for [Vue][vue]
 
-> Migrated from [react-threejs](https://github.com/fritx/react-threejs)
+Migrated from [react-threejs][react-threejs]
+
+Demos: [react-world][react-world], [vue-world][vue-world]
 
 <img width="400" src="https://github.com/fritx/react-threejs/raw/dev/debugging.jpg">
 
@@ -62,6 +64,7 @@ Vue.use(VueThreejs)
 
 **Study Notes**
 
+- [VueJS extend component: remove parent's property](https://stackoverflow.com/questions/45680047/vuejs-extend-component-remove-parents-property)
 - [Vue2 migration commits of vue-threejs](https://github.com/fritx/vue-threejs/commits/vue2)
   - `cannot use <slot> as root element`
   - `lifecycle ready => mounted`
@@ -71,6 +74,8 @@ Vue.use(VueThreejs)
 - [v-ref is not working with <template> element](https://github.com/vuejs/vue/issues/681#issuecomment-75802646)
 - [Can I use a compoent inherit other compoent?](https://github.com/vuejs/Discussion/issues/354#issuecomment-133019536)
 
+[react-world]: http://fritx.github.io/react-threejs/example/
+[vue-world]: http://fritx.github.io/vue-threejs/
 [react-threejs]: https://github.com/fritx/react-threejs
 [threejs]: https://github.com/mrdoob/three.js
 [vue]: https://github.com/vuejs/vue
