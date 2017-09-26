@@ -13,9 +13,7 @@
 
 <script>
 import * as THREE from 'three'
-import MTLLoader from '@/threex/loaders/MTLLoader'
-import OBJLoader from '@/threex/loaders/OBJLoader'
-import Object3D from '@/components/Object3D'
+import { MTLLoader, OBJLoader, Object3D } from '@'
 
 export default {
   name: 'SF03',
@@ -59,7 +57,7 @@ export default {
 
     generateDetonation () {
       var texture = new THREE.TextureLoader()
-        .load(require('@/../static/threex/spaceships/lensflare0_alpha.png'))
+        .load(require('@root/static/threex/spaceships/lensflare0_alpha.png'))
       var geometry = new THREE.PlaneGeometry(1, 1)
       var material = new THREE.MeshBasicMaterial({
         color: 0x00ffff,

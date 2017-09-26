@@ -32,11 +32,6 @@
 </template>
 
 <script>
-import PositionalAudio from '@/components/PositionalAudio'
-import OrbitControls from '@/components/OrbitControls'
-import MovementSystem from '@/physics/MovementSystem'
-import MovementObject from '@/physics/MovementObject'
-import MassObject from '@/physics/MassObject'
 import Ocean from './Ocean'
 import SF03 from './SF03'
 import Cube from './Cube'
@@ -45,11 +40,6 @@ import { GUI } from 'dat.gui/build/dat.gui.min'
 export default {
   name: 'App',
   components: {
-    MovementSystem,
-    MovementObject,
-    MassObject,
-    PositionalAudio,
-    OrbitControls,
     Cube,
     Ocean,
     sf03: SF03
