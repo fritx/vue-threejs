@@ -1,6 +1,6 @@
 {
   "name": "vue-threejs",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Three.js bindings for Vue",
   "author": "Fritz Lin <uxfritz@163.com>",
   "repository": "https://github.com/fritx/vue-threejs",
