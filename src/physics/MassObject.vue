@@ -4,7 +4,7 @@ import { $vec } from '@/util'
 import Vue from 'vue'
 
 export default {
-  name: 'mass-object',
+  name: 'MassObject',
   mixins: [MovementObject],
 
   // Vue provide/inject not inherited??

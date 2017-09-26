@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Object3D from '@/components/Object3D'
+import { Object3D } from '@'
 import * as THREE from 'three'
 
 export default {
@@ -15,7 +15,7 @@ export default {
   created () {
     let { size, texture } = this
     let map = new THREE.TextureLoader()
-      .load(require(`@/../static/textures/${texture}.png`))
+      .load(require(`@root/static/textures/${texture}.png`))
     let geometry = new THREE.BoxGeometry(size, size, size)
     let material = new THREE.MeshBasicMaterial({ map })
     let cube = new THREE.Mesh(geometry, material)

@@ -8,7 +8,7 @@
 import Object3D from '@/components/Object3D'
 
 export default {
-  name: 'movement-object',
+  name: 'MovementObject',
   mixins: [Object3D],
   components: { Object3D },
 
