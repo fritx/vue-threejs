@@ -38,7 +38,7 @@ var webpackConfig = merge(baseWebpackConfig, {
 
 // overwriten
 webpackConfig.entry = {
-  'vue-threejs': './src/index.js'
+  'index': './src/index.js'
 }
 webpackConfig.output = {
   path: path.resolve(__dirname, '../lib'),

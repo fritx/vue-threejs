@@ -1,24 +1,26 @@
-import Animation from './components/Animation'
-import Renderer from './components/Renderer'
-import Object3D from './components/Object3D'
-import Light from './components/Light'
-import Scene from './components/Scene'
-import Camera from './components/Camera'
-import AudioListener from './components/AudioListener'
+let vueComs = {}
 
-// todo: automatic build script
-export default {
-  install (Vue) {
-    Vue.component(Animation.name, Animation)
-    Vue.component(Renderer.name, Renderer)
-    Vue.component(Scene.name, Scene)
-    Vue.component(Camera.name, Camera)
-    Vue.component(AudioListener.name, AudioListener)
-    Vue.component(Light.name, Light)
+let vueContext = require.context('./', true, /\.vue$/)
+vueContext.keys().forEach(path => {
+  let com = vueContext(path)
+  vueComs[com.name] = com
+  exports[com.name] = com
+})
 
-    // name 'object3d' is required,
+let loaderContext = require.context('./threex/loaders', false, /\.js$/)
+loaderContext.keys().forEach(path => {
+  let com = loaderContext(path).default
+  // fix: uglify would kill the function name
+  let name = path.match(/([^/]+)\.js$/)[1]
+  exports[name] = com
+})
+
+exports.install = Vue => {
+  Object.keys(vueComs).forEach(k => {
+    // fix: name 'object3d' is required,
     // or it would be parsed to 'object-3-d' somewhere else
-    Vue.component(Object3D.name, Object3D)
-    Vue.component('object3d', Object3D)
-  }
+    let rk = k
+    if (k === 'Object3D') rk = 'object3d'
+    Vue.component(rk, vueComs[k])
+  })
 }

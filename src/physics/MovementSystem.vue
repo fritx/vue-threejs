@@ -11,7 +11,7 @@ import Object3D from '@/components/Object3D'
 import { $vec } from '@/util'
 
 export default {
-  name: 'movement-system',
+  name: 'MovementSystem',
   mixins: [Object3D],
   components: { Animation },
 
