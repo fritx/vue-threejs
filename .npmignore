@@ -17,4 +17,6 @@ build
 config
 src
 static
+examples
+index.html
 .*

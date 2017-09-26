@@ -25,6 +25,7 @@ module.exports = {
       '@root': resolve(''),
       '@': resolve('src')
       // '@': resolve('lib')
+      // '@': resolve('package/')
     }
   },
   module: {

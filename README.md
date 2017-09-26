@@ -44,23 +44,20 @@ Vue.use(VueThreejs)
 
 - [ ] Basic components
   - [x] renderer/scene/camera/listener
-  - [x] object3d/light/audio/animation
-  - [ ] controls/mesh/more
+  - [x] object3d/light/audio/controls/animation
+  - [ ] mesh/more
 - [ ] Watch for props change
   - [x] position/rotation
   - [ ] obj/more
 - [ ] Animation
-  - [x] component/animate/speed/paused
-  - [ ] blocked/global-control
+  - [x] component/animate/speed/paused/blocked
+  - [ ] global-control
 - [ ] Physical engine
   - [x] movement(a/v/pos/ra/rv/rot)/mass(m/F)
   - [ ] gravity(G/r)/collision
 - [ ] Unit test
   - [x] karma/mocha/phantom
   - [ ] avoriaz/ava
-- [ ] Build commands
-  - [x] example dist
-  - [ ] library dist
 
 **Study Notes**
 
