@@ -14,12 +14,12 @@ export default {
   ],
 
   props: {
-    obj: { type: Scene }
+    obj: { type: Object }
   },
 
   data () {
     let curObj = this.obj
-    if (!(curObj instanceof Scene)) {
+    if (!curObj) {
       curObj = new Scene()
     }
     curObj.name = curObj.name || curObj.type

@@ -1,5 +1,5 @@
 <script>
-import { Camera, PerspectiveCamera } from 'three'
+import { PerspectiveCamera } from 'three'
 import Object3D from './Object3D'
 
 export default {
@@ -12,14 +12,14 @@ export default {
   ],
 
   props: {
-    obj: { type: Camera }
+    obj: { type: Object }
   },
 
   data () {
     let curObj = this.obj
 
     const { w, h } = this.global.rendererSize // fixme
-    if (!(curObj instanceof Camera)) {
+    if (!curObj) {
       curObj = new PerspectiveCamera(75, w / h, 0.1, 1000)
     }
     curObj.name = curObj.name || curObj.type

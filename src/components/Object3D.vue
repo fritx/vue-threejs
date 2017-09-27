@@ -18,7 +18,7 @@ export default {
   inject: ['parentObj'],
 
   props: {
-    obj: { type: Object3D },
+    obj: { type: Object },
     scale: { type: [Object, Number] }, // { x, y, z }
     position: { type: Object }, // { x, y, z }
     rotation: { type: Object } // { x, y, z }
@@ -53,7 +53,7 @@ export default {
     let curObj = this.obj
 
     // this.obj = new Object3D() // holder
-    if (!(curObj instanceof Object3D)) {
+    if (!curObj) {
       curObj = new Object3D()
     }
 

@@ -23,13 +23,13 @@ export default {
       type: Object, // { w, h }
       required: true
     },
-    obj: { type: WebGLRenderer }
+    obj: { type: Object }
   },
 
   data () {
     let curObj = this.obj
 
-    if (!(curObj instanceof WebGLRenderer)) {
+    if (!curObj) {
       curObj = new WebGLRenderer({ antialias: true })
     }
     curObj.name = curObj.name || curObj.type
