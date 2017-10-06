@@ -4,7 +4,6 @@
 
 <script>
 import { Object3D } from 'three'
-import { assign } from '../util'
 
 export default {
   name: 'Object3D',
@@ -34,13 +33,13 @@ export default {
     position: {
       deep: true,
       handler (v) {
-        assign(this.curObj.position, v)
+        Object.assign(this.curObj.position, v)
       }
     },
     rotation: {
       deep: true,
       handler (v) {
-        assign(this.curObj.rotation, v)
+        Object.assign(this.curObj.rotation, v)
       }
     }
   },
@@ -68,8 +67,8 @@ export default {
   // http://rc.vuejs.org/guide/migration.html#ready-deprecated
   mounted () {
     this.setScale(this.scale)
-    assign(this.curObj.position, this.position)
-    assign(this.curObj.rotation, this.rotation)
+    Object.assign(this.curObj.position, this.position)
+    Object.assign(this.curObj.rotation, this.rotation)
     if (this.parentObj) {
       this.parentObj.add(this.curObj)
     }
@@ -89,7 +88,7 @@ export default {
       if (v && typeof v === 'number') {
         v = { x: v, y: v, z: v }
       }
-      assign(this.curObj.scale, v)
+      Object.assign(this.curObj.scale, v)
     }
   }
 }
