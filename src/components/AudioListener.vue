@@ -11,14 +11,15 @@ export default {
   mixins: [Object3D],
   components: { Object3D },
 
-  data () {
-    return { listener: null }
-  },
+  inject: [
+    ...Object3D.inject,
+    'global'
+  ],
 
-  created () {
+  data () {
     let listener = new AudioListener()
-    this.listener = listener
-    this.$root.__audioListener = listener // fixme
+    this.global.audioListener = listener // fixme
+    return { listener }
   }
 }
 </script>

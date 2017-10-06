@@ -8,13 +8,12 @@
 <script>
 /* global requestAnimationFrame */
 import * as THREE from 'three'
-import Object3D from '@/components/Object3D'
+import { Object3D } from '@'
 
 // http://threejs.org/examples/#webgl_geometry_dynamic
 export default {
   name: 'Ocean',
   mixins: [Object3D],
-  components: { Object3D },
 
   data () {
     return { ocean: null }
@@ -43,10 +42,11 @@ export default {
     },
 
     animate (tt) {
-      for (let i = 0, l = this.ocean.geometry.vertices.length; i < l; i++) {
-        this.ocean.geometry.vertices[i].y = 10 * Math.sin(i / 5 + (tt + i) / 7)
+      let { geometry } = this.ocean
+      for (let i = 0, l = geometry.vertices.length; i < l; i++) {
+        geometry.vertices[i].y = 10 * Math.sin(i / 5 + (tt + i) / 7)
       }
-      this.ocean.geometry.verticesNeedUpdate = true
+      geometry.verticesNeedUpdate = true
     }
   }
 }

@@ -8,12 +8,27 @@ var path = require('path')
 var chalk = require('chalk')
 var webpack = require('webpack')
 var config = require('../config')
-var webpackConfig = require('./webpack.prod.conf')
+var webpackConfig
+
+var isLibTarget = process.env.TARGET === 'lib'
+if (isLibTarget) {
+  webpackConfig = require('./webpack.lib.conf')
+} else {
+  webpackConfig = require('./webpack.prod.conf')
+}
 
 var spinner = ora('building for production...')
 spinner.start()
 
-rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
+let dir
+if (isLibTarget) {
+  dir = path.join(config.build.libRoot)
+} else {
+  // dir = path.join(config.build.assetsRoot, config.build.assetsSubDirectory)
+  dir = path.join(config.build.assetsRoot)
+}
+
+rm(dir, err => {
   if (err) throw err
   webpack(webpackConfig, function (err, stats) {
     spinner.stop()
@@ -27,7 +42,8 @@ rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
     }) + '\n\n')
 
     console.log(chalk.cyan('  Build complete.\n'))
-    console.log(chalk.yellow(
+
+    if (!isLibTarget) console.log(chalk.yellow(
       '  Tip: built files are meant to be served over an HTTP server.\n' +
       '  Opening index.html over file:// won\'t work.\n'
     ))

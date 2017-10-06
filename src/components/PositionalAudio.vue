@@ -13,6 +13,11 @@ export default {
   mixins: [Object3D],
   components: { Object3D },
 
+  inject: [
+    ...Object3D.inject,
+    'global'
+  ],
+
   props: { url: String },
 
   data () {
@@ -21,7 +26,7 @@ export default {
 
   // mounted to ensure audioListener
   mounted () {
-    let listener = this.$root.__audioListener // fixme
+    let listener = this.global.audioListener // fixme
     let audio = new PositionalAudio(listener)
     audio.name = 'PositionalAudio'
     this.audio = audio
