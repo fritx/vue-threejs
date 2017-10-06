@@ -31,6 +31,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     }),
     new webpack.ExternalsPlugin('commonjs2', [
       'vue',
+      'dat.gui',
       'oimo',
       'three'
     ])
