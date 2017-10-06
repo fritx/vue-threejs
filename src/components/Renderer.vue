@@ -14,6 +14,7 @@ export default {
 
   provide () {
     return {
+      parentObj: null, // avoid "injection not found" warning
       global: this.global
     }
   },
@@ -31,6 +32,7 @@ export default {
 
     if (!curObj) {
       curObj = new WebGLRenderer({ antialias: true })
+      curObj.setClearColor(0x000000)
     }
     curObj.name = curObj.name || curObj.type
     curObj.setSize(this.size.w, this.size.h)
@@ -39,7 +41,6 @@ export default {
     let global = {}
     global.rendererSize = this.size
     global.rendererDom = curObj.domElement
-    curObj.setClearColor(0x000000)
 
     return { curObj, global }
   },
