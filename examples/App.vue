@@ -27,6 +27,12 @@
           <cube texture="redwool" :size="1.1"></cube>
         </movement-object>
       </movement-system>
+
+      <oimo-world :options="{ gravity: [0, 2, 0] }">
+        <oimo-body v-for="t in textures" :key="t" :options="{ move: true }">
+          <cube :texture="t" :size="1"></cube>
+        </oimo-body>
+      </oimo-world>
     </scene>
   </renderer>
 </template>
@@ -47,6 +53,9 @@ export default {
 
   data () {
     return {
+      textures: [
+        'cobblestone', 'diamond', 'redwool'
+      ],
       ui: {
         camera: {
           x: 9, y: 21, z: 20
