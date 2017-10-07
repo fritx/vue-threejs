@@ -72,7 +72,7 @@ export default {
     setInterval(() => {
       this.ui.movemSysKey += 1
     }, 15000)
-  },
+  }
 }
 </script>
 

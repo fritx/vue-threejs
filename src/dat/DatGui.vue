@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { GUI } from 'dat.gui/build/dat.gui.min'
+import { GUI } from 'dat.gui'
 
 export default {
   name: 'dat-gui',
