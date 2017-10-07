@@ -22,6 +22,7 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
+      'dat.gui': 'dat.gui/build/dat.gui.min',
       '@root': resolve(''),
       '@': resolve('src')
       // '@': resolve('lib')
@@ -34,7 +35,7 @@ module.exports = {
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
         enforce: 'pre',
-        include: [resolve('src'), resolve('test')],
+        include: ['examples', 'src', 'test'].map(resolve),
         options: {
           formatter: require('eslint-friendly-formatter')
         }
@@ -47,7 +48,7 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test')]
+        include: ['examples', 'src', 'test'].map(resolve)
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
