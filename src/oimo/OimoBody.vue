@@ -17,15 +17,14 @@ export default {
 
     let body = this.world.add(opts)
     body.connectMesh(this.curObj)
+
     this.body = body
+    this.dispatchEvent('vm-oimo-body', this)
   },
 
   beforeDestroy () {
     this.body.dispose()
+    this.dispatchEvent('vm-oimo-body', null)
   }
 }
-
-// function radianToDegree (radian) {
-//   return radian * (180 / Math.PI)
-// }
 </script>
