@@ -1,12 +1,10 @@
-<template>
-  <div><slot></slot></div>
-</template>
-
 <script>
+import Base from '@/components/Base'
 import { Object3D } from 'three'
 
 export default {
   name: 'Object3D',
+  mixins: [Base],
 
   provide () {
     return {

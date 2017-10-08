@@ -1,14 +1,12 @@
-<template>
-  <div><slot></slot></div>
-</template>
-
 <script>
 /* global requestAnimationFrame */
 /* global cancelAnimationFrame */
+import Base from '@/components/Base'
 import { Clock } from 'three'
 
 export default {
   name: 'Animation',
+  mixins: [Base],
 
   props: {
     blocked: { type: Boolean },
