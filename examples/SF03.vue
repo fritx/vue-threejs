@@ -1,11 +1,11 @@
 <template>
   <object3d :position="pos">
     <div v-if="body">
-      <object3d :obj="body"></object3d>
-      <object3d :obj="detonation1" :position="{ x: 5, z: 0.8 }"></object3d>
-      <object3d :obj="detonation2" :position="{ x: -5, z: 0.8 }"></object3d>
-      <object3d :obj="shoot1" :position="{ x: 5, z: 2.6 }"></object3d>
-      <object3d :obj="shoot2" :position="{ x: -5, z: 2.6 }"></object3d>
+      <mesh :obj="body"></mesh>
+      <mesh :obj="detonation1" :position="{ x: 5, z: 0.8 }"></mesh>
+      <mesh :obj="detonation2" :position="{ x: -5, z: 0.8 }"></mesh>
+      <mesh :obj="shoot1" :position="{ x: 5, z: 2.6 }"></mesh>
+      <mesh :obj="shoot2" :position="{ x: -5, z: 2.6 }"></mesh>
       <animation :fn="animate"></animation>
     </div>
   </object3d>

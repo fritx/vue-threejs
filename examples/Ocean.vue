@@ -1,6 +1,6 @@
 <template>
   <div>
-    <object3d :obj="ocean"></object3d>
+    <mesh :obj="ocean"></mesh>
     <animation :fn="animate" :speed="5"></animation>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <script>
 import Base from '@/components/Base'
-import { Object3D } from 'three'
+import * as THREE from 'three'
 
 export default {
   name: 'Object3D',
@@ -15,6 +15,8 @@ export default {
   inject: ['parentObj'],
 
   props: {
+    name: { type: String },
+    type: { type: String, default: 'Object3D' },
     obj: { type: Object },
     scale: { type: [Object, Number] }, // { x, y, z }
     position: { type: Object }, // { x, y, z }
@@ -51,12 +53,12 @@ export default {
 
     // this.obj = new Object3D() // holder
     if (!curObj) {
-      curObj = new Object3D()
+      curObj = new THREE[this.type]()
     }
 
     // fix vue 2.0 `this.constructor.name` becomes `VueComponent`
     // curObj.name = curObj.name || this.constructor.name
-    curObj.name = curObj.name || curObj.type
+    curObj.name = this.name || curObj.name || curObj.type
 
     return { curObj }
   },
