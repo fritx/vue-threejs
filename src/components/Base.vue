@@ -12,6 +12,7 @@ export default {
       let e = new CustomEvent(name, {
         detail,
         bubbles: true,
+        cancelable: true,
         ...options
       })
       return this.$el.dispatchEvent(e)

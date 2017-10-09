@@ -1,5 +1,5 @@
 <template>
-  <div @vm-oimo-body="handleBodyVm">
+  <div @vm-oimo-body="handleBody">
     <slot></slot>
   </div>
 </template>
@@ -10,7 +10,7 @@ export default {
   inject: ['spaceVms'],
 
   data () {
-    return { bodyVm: null }
+    return { body: null }
   },
 
   mounted () {
@@ -22,15 +22,10 @@ export default {
     if (index > -1) this.spaceVms.splice(index, 1)
   },
 
-  computed: {
-    body () {
-      return this.bodyVm && this.bodyVm.body
-    }
-  },
-
   methods: {
-    handleBodyVm (e) {
-      this.bodyVm = e.detail
+    handleBody (e) {
+      e.stopPropagation()
+      this.body = e.detail
     }
   }
 }

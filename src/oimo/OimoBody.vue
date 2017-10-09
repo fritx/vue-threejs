@@ -17,9 +17,13 @@ export default {
 
     let body = this.world.add(opts)
     body.connectMesh(this.curObj)
-
     this.body = body
-    this.dispatchEvent('vm-oimo-body', this)
+
+    // If you want to wait until the entire view has been rendered
+    // https://vuejs.org/v2/api/#mounted
+    this.$nextTick(() => {
+      this.dispatchEvent('vm-oimo-body', body)
+    })
   },
 
   beforeDestroy () {

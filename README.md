@@ -54,7 +54,8 @@ Vue.use(VueThreejs)
   - [ ] global-control
 - [ ] Physical engine
   - [x] movement(a/v/pos/ra/rv/rot)/mass(m/F)
-  - [ ] gravity(G/r)/collision
+  - [x] gravity(G/r)/collision/oimo
+  - [ ] circular-motion/centripetal-force
 - [ ] Unit test
   - [x] karma/mocha/phantom
   - [ ] avoriaz/ava
