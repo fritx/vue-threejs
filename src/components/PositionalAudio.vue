@@ -12,12 +12,7 @@ export default {
   name: 'PositionalAudio',
   mixins: [Object3D],
   components: { Object3D },
-
-  inject: [
-    ...Object3D.inject,
-    'global'
-  ],
-
+  inject: ['global'],
   props: { url: String },
 
   data () {
