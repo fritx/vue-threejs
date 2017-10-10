@@ -6,6 +6,7 @@ export default {
   name: 'Geometry',
   mixins: [Base],
   props: {
+    obj: { type: Object },
     args: { type: Array, default: () => [] },
     type: { type: String, default: '' }
   },
@@ -17,6 +18,7 @@ export default {
   },
 
   mounted () {
+    this.$emit('update:obj', this.geometry)
     this.$nextTick(() => {
       this.dispatchEvent('vm-geometry', this.geometry)
     })
@@ -24,6 +26,7 @@ export default {
 
   beforeDestroy () {
     this.dispatchEvent('vm-geometry', null)
+    this.$emit('update:obj', null)
   }
 }
 </script>

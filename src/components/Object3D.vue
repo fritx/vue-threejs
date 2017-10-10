@@ -69,15 +69,18 @@ export default {
     this.setScale(this.scale)
     Object.assign(this.curObj.position, this.position)
     Object.assign(this.curObj.rotation, this.rotation)
+
     if (this.parentObj) {
       this.parentObj.add(this.curObj)
     }
+    this.$emit('update:obj', this.curObj)
   },
 
   // detached => destroyed + (nextTick?)
   // http://rc.vuejs.org/guide/migration.html#detached-deprecated
   // but we use beforeDestroy to clean up
   beforeDestroy () {
+    this.$emit('update:obj', null)
     if (this.parentObj) {
       this.parentObj.remove(this.curObj)
     }

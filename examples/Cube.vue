@@ -1,7 +1,7 @@
 <template>
   <mesh name="Cube">
     <geometry type="Box" :args="[size, size, size]"></geometry>
-    <material type="MeshBasic" :options="material"></material>
+    <material type="MeshBasic" :options="matOpts"></material>
   </mesh>
 </template>
 
@@ -16,8 +16,10 @@ export default {
 
   data () {
     let url = require(`@root/static/textures/${this.texture}.png`)
-    let map = new TextureLoader().load(url)
-    return { material: { map } }
+    let texture = new TextureLoader().load(url)
+    return {
+      matOpts: { map: texture }
+    }
   }
 }
 </script>
