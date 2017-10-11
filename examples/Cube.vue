@@ -1,12 +1,13 @@
 <template>
   <mesh name="Cube">
     <geometry type="Box" :args="[size, size, size]"></geometry>
-    <material type="MeshBasic" :options="matOpts"></material>
+    <material type="MeshBasic">
+      <texture :url="texUrl"></texture>
+    </material>
   </mesh>
 </template>
 
 <script>
-import { TextureLoader } from 'three'
 import { Object3D } from '@'
 
 export default {
@@ -15,10 +16,8 @@ export default {
   props: { size: Number, texture: String },
 
   data () {
-    let url = require(`@root/static/textures/${this.texture}.png`)
-    let texture = new TextureLoader().load(url)
     return {
-      matOpts: { map: texture }
+      texUrl: require(`@root/static/textures/${this.texture}.png`)
     }
   }
 }

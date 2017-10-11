@@ -37,8 +37,7 @@ export default {
       .load(require('@root/static/threex/spaceships/lensflare0_alpha.png'))
 
     let shootCanvas = this.generateShootCanvas()
-    let shootTexture = new THREE.Texture(shootCanvas)
-    shootTexture.needsUpdate = true
+    let shootTexture = new THREE.CanvasTexture(shootCanvas)
 
     return {
       detonationMatOpts: {

@@ -3,14 +3,16 @@
     <mesh name="Ocean">
       <geometry type="Plane" :args="[10000, 10000, 40, 40]"
           :obj.sync="geom"></geometry>
-      <material type="MeshBasic" :options="matOpts"></material>
+      <material type="MeshBasic" :color="0x0044ff">
+        <texture :options="txtOpts"></texture>
+      </material>
     </mesh>
     <animation v-if="geomReady" :fn="animate" :speed="5"></animation>
   </div>
 </template>
 
 <script>
-import { TextureLoader, RepeatWrapping } from 'three'
+import { RepeatWrapping } from 'three'
 import { Object3D } from '@'
 
 // http://threejs.org/examples/#webgl_geometry_dynamic
@@ -19,12 +21,13 @@ export default {
   mixins: [Object3D],
 
   data () {
-    // todo: texture child
-    let texture = new TextureLoader().load(require('./water.jpg'))
-    texture.wrapS = texture.wrapT = RepeatWrapping
-    texture.repeat.set(5, 5)
     return {
-      matOpts: { color: 0x0044ff, map: texture },
+      txtOpts: {
+        url: require('./water.jpg'),
+        wrapS: RepeatWrapping,
+        wrapT: RepeatWrapping,
+        repeat: [5, 5]
+      },
       geomReady: false,
       geom: null,
       ocean: null
