@@ -2,28 +2,68 @@
   <object3d :position="pos">
     <div v-if="body">
       <mesh :obj="body"></mesh>
-      <mesh :obj="detonation1" :position="{ x: 5, z: 0.8 }"></mesh>
-      <mesh :obj="detonation2" :position="{ x: -5, z: 0.8 }"></mesh>
-      <mesh :obj="shoot1" :position="{ x: 5, z: 2.6 }"></mesh>
-      <mesh :obj="shoot2" :position="{ x: -5, z: 2.6 }"></mesh>
+
+      <mesh v-for="n in 2" :key="n" :scale="4"
+          :position="{ x: 5 * Math.sign(n - 1.5), z: 0.8 }">
+        <geometry type="Plane" :args="[1, 1]"></geometry>
+        <material type="MeshBasic" :options="detonationMatOpts"></material>
+      </mesh>
+
+      <object3d v-for="n in 2" :key="n"
+          :rotation="{ y: Math.PI / 2 }" :scale="4"
+          :position="{ x: 5 * Math.sign(n - 1.5), z: 2.6 }">
+        <mesh v-for="n1 in 4" :key="n1"
+            :rotation="{ x: (n1 - 1) * Math.PI / 4 }">
+          <geometry type="Plane" :args="[1, 1]"></geometry>
+          <material type="MeshBasic" :options="shootMatOpts"></material>
+        </mesh>
+      </object3d>
+
       <animation :fn="animate"></animation>
     </div>
   </object3d>
 </template>
 
 <script>
-import * as THREE from 'three'
 import { MTLLoader, OBJLoader, Object3D } from '@'
+import * as THREE from 'three'
 
 export default {
   name: 'SF03',
   mixins: [Object3D],
 
   data () {
-    return { pos: null, body: null }
+    let detonationTexture = new THREE.TextureLoader()
+      .load(require('@root/static/threex/spaceships/lensflare0_alpha.png'))
+
+    let shootCanvas = this.generateShootCanvas()
+    let shootTexture = new THREE.Texture(shootCanvas)
+    shootTexture.needsUpdate = true
+
+    return {
+      detonationMatOpts: {
+        color: 0x00ffff,
+        map: detonationTexture,
+        side: THREE.DoubleSide,
+        blending: THREE.AdditiveBlending,
+        opacity: 2,
+        depthWrite: false,
+        transparent: true
+      },
+      shootMatOpts: {
+        color: 0xffaacc,
+        map: shootTexture,
+        side: THREE.DoubleSide,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+        transparent: true
+      },
+      pos: null,
+      body: null
+    }
   },
 
-  /* eslint-disable */
+  /* eslint-disable semi, comma-dangle, space-in-parens */
   created () {
     // todo: better code
     const mtlLoader = new MTLLoader();
@@ -40,64 +80,11 @@ export default {
         this.body = body
       })
     })
-
-    const detonation = this.generateDetonation()
-    this.detonation1 = detonation
-    this.detonation2 = detonation.clone()
-
-    const shoot = this.generateShoot()
-    this.shoot1 = shoot
-    this.shoot2 = shoot.clone()
   },
 
   methods: {
     animate (tt) {
       this.pos = { y: Math.sin(tt) }
-    },
-
-    generateDetonation () {
-      var texture = new THREE.TextureLoader()
-        .load(require('@root/static/threex/spaceships/lensflare0_alpha.png'))
-      var geometry = new THREE.PlaneGeometry(1, 1)
-      var material = new THREE.MeshBasicMaterial({
-        color: 0x00ffff,
-        map: texture,
-        side: THREE.DoubleSide,
-        blending: THREE.AdditiveBlending,
-        opacity: 2,
-        depthWrite: false,
-        transparent: true,
-      })
-      var detonation = new THREE.Mesh(geometry, material)
-      detonation.scale.multiplyScalar(4)
-      return detonation
-    },
-
-    generateShoot () {
-      var canvas = this.generateShootCanvas();
-      var texture = new THREE.Texture( canvas );
-      texture.needsUpdate = true;
-      var material = new THREE.MeshBasicMaterial({
-        color: 0xffaacc,
-        map: texture,
-        side: THREE.DoubleSide,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false,
-        transparent: true,
-      })
-
-      var container = new THREE.Object3D()
-      container.rotateY(Math.PI / 2)
-      container.scale.multiplyScalar(4)
-      var nPlanes = 4;
-      for (var i = 0; i < nPlanes; i++) {
-        var geometry = new THREE.PlaneGeometry(1, 1)
-        var mesh = new THREE.Mesh(geometry, material)
-        mesh.material = material
-        mesh.rotateX(i * Math.PI / nPlanes)
-        container.add(mesh)
-      }
-      return container
     },
 
     generateShootCanvas () {
