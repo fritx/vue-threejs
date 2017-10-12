@@ -6,7 +6,9 @@
       <mesh v-for="n in 2" :key="n" :scale="4"
           :position="{ x: 5 * Math.sign(n - 1.5), z: 0.8 }">
         <geometry type="Plane" :args="[1, 1]"></geometry>
-        <material type="MeshBasic" :options="detonationMatOpts"></material>
+        <material type="MeshBasic" :options="detonation.matOpts">
+          <texture url="static/threex/spaceships/lensflare0_alpha.png"></texture>
+        </material>
       </mesh>
 
       <object3d v-for="n in 2" :key="n"
@@ -15,7 +17,9 @@
         <mesh v-for="n1 in 4" :key="n1"
             :rotation="{ x: (n1 - 1) * Math.PI / 4 }">
           <geometry type="Plane" :args="[1, 1]"></geometry>
-          <material type="MeshBasic" :options="shootMatOpts"></material>
+          <material type="MeshBasic" :options="shoot.matOpts">
+            <texture :canvas="shoot.txtCanvas"></texture>
+          </material>
         </mesh>
       </object3d>
 
@@ -33,29 +37,26 @@ export default {
   mixins: [Object3D],
 
   data () {
-    let detonationTexture = new THREE.TextureLoader()
-      .load(require('@root/static/threex/spaceships/lensflare0_alpha.png'))
-
-    let shootCanvas = this.generateShootCanvas()
-    let shootTexture = new THREE.CanvasTexture(shootCanvas)
-
     return {
-      detonationMatOpts: {
-        color: 0x00ffff,
-        map: detonationTexture,
-        side: THREE.DoubleSide,
-        blending: THREE.AdditiveBlending,
-        opacity: 2,
-        depthWrite: false,
-        transparent: true
+      detonation: {
+        matOpts: {
+          color: 0x00ffff,
+          side: THREE.DoubleSide,
+          blending: THREE.AdditiveBlending,
+          opacity: 2,
+          depthWrite: false,
+          transparent: true
+        }
       },
-      shootMatOpts: {
-        color: 0xffaacc,
-        map: shootTexture,
-        side: THREE.DoubleSide,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false,
-        transparent: true
+      shoot: {
+        matOpts: {
+          color: 0xffaacc,
+          side: THREE.DoubleSide,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false,
+          transparent: true
+        },
+        txtCanvas: this.generateShootCanvas()
       },
       pos: null,
       body: null

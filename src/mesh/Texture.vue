@@ -8,8 +8,8 @@ export default {
   inject: ['material'],
   props: {
     url: String,
-    image: Object,
-    canvas: Object,
+    image: [Image, ImageData],
+    canvas: HTMLCanvasElement,
     options: { type: Object, default: () => ({}) }
   },
 
