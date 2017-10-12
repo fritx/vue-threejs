@@ -11,7 +11,8 @@
       <light :hex="0xefefff" :intensity="2" :position="{ x: -50, y: -50, z: -50 }"></light>
       <ocean :position="ui.ocean"></ocean>
       <sf03 :position="{ y: 10 }" :scale="ui.sf03.scale"></sf03>
-      <positional-audio :position="{ y: 10 }" url="static/Project_Utopia.ogg"></positional-audio>
+      <positional-audio loop url="static/Project_Utopia.ogg"
+          :volume="0.3" :position="{ y: 10 }"></positional-audio>
 
       <movement-system :key="ui.movemSysKey">
         <mass-object :rv0="{ x: 2, y: 2 }" :v0="{ x: 10 }"
