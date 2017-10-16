@@ -5,6 +5,19 @@
 <script>
 export default {
   name: 'Base',
+  inject: ['_baseUrl'],
+  props: {
+    baseUrl: {
+      type: String,
+      default () { return this._baseUrl }
+    }
+  },
+
+  provide () {
+    return {
+      _baseUrl: this.baseUrl
+    }
+  },
 
   methods: {
     dispatchEvent (name, detail, options = {}) {

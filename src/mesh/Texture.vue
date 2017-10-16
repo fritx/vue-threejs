@@ -21,6 +21,9 @@ export default {
 
     let texture
     if (url) {
+      if (this.baseUrl) {
+        url = this.baseUrl + url
+      }
       texture = new TextureLoader().load(url)
     } else if (canvas) {
       texture = new CanvasTexture(canvas)

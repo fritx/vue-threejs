@@ -10,8 +10,7 @@ export default {
   props: {
     process: Function,
     mtlUrl: String,
-    objUrl: String,
-    baseUrl: String
+    objUrl: String
   },
 
   created () {

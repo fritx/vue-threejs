@@ -1,8 +1,7 @@
 <template>
-  <object3d :position="pos">
+  <object3d :position="pos" base-url="static/threex/spaceships/">
     <mesh>
-      <m-obj-mtl base-url="static/threex/spaceships/"
-          obj-url="SpaceFighter03.obj"
+      <m-obj-mtl obj-url="SpaceFighter03.obj"
           mtl-url="SpaceFighter03.mtl"
           :process="getBody">
       </m-obj-mtl>
@@ -12,7 +11,7 @@
         :position="{ x: 5 * Math.sign(n - 1.5), z: 0.8 }">
       <geometry type="Plane" :args="[1, 1]"></geometry>
       <material type="MeshBasic" :options="detonation.matOpts">
-        <texture url="static/threex/spaceships/lensflare0_alpha.png"></texture>
+        <texture url="lensflare0_alpha.png"></texture>
       </material>
     </mesh>
 
