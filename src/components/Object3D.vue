@@ -41,6 +41,10 @@ export default {
       handler (v) {
         Object.assign(this.curObj.rotation, v)
       }
+    },
+    curObj (obj, oldObj) {
+      this.unsetObj(oldObj)
+      this.setObj(obj)
     }
   },
 
@@ -56,37 +60,43 @@ export default {
       curObj = new THREE[this.type]()
     }
 
-    // fix vue 2.0 `this.constructor.name` becomes `VueComponent`
-    // curObj.name = curObj.name || this.constructor.name
-    curObj.name = this.name || curObj.name || curObj.type
-
     return { curObj }
   },
 
   // ready => mounted + (nextTick?)
   // http://rc.vuejs.org/guide/migration.html#ready-deprecated
   mounted () {
-    this.setScale(this.scale)
-    Object.assign(this.curObj.position, this.position)
-    Object.assign(this.curObj.rotation, this.rotation)
-
-    if (this.parentObj) {
-      this.parentObj.add(this.curObj)
-    }
-    this.$emit('update:obj', this.curObj)
+    this.setObj(this.curObj)
   },
 
   // detached => destroyed + (nextTick?)
   // http://rc.vuejs.org/guide/migration.html#detached-deprecated
   // but we use beforeDestroy to clean up
   beforeDestroy () {
-    this.$emit('update:obj', null)
-    if (this.parentObj) {
-      this.parentObj.remove(this.curObj)
-    }
+    this.unsetObj(this.curObj)
   },
 
   methods: {
+    setObj (obj) {
+      // fix vue 2.0 `this.constructor.name` becomes `VueComponent`
+      // obj.name = obj.name || this.constructor.name
+      obj.name = this.name || obj.name || obj.type
+
+      this.setScale(this.scale)
+      Object.assign(obj.position, this.position)
+      Object.assign(obj.rotation, this.rotation)
+
+      if (this.parentObj) {
+        this.parentObj.add(obj)
+      }
+      this.$emit('update:obj', obj)
+    },
+    unsetObj (obj) {
+      this.$emit('update:obj', null)
+      if (this.parentObj) {
+        this.parentObj.remove(obj)
+      }
+    },
     setScale (v) {
       if (v && typeof v === 'number') {
         v = { x: v, y: v, z: v }
