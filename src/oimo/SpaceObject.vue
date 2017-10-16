@@ -24,7 +24,6 @@ export default {
 
   methods: {
     handleBody (e) {
-      e.stopPropagation()
       this.body = e.detail
     }
   }

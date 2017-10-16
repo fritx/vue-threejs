@@ -13,7 +13,7 @@
       <sf03 :position="{ y: 10 }" :scale="ui.sf03.scale"></sf03>
       <positional-audio :position="{ y: 10 }" url="static/Project_Utopia.ogg"></positional-audio>
 
-      <movement-system :key="ui.movemSysKey">
+      <movement-system :key="ui.sysKey">
         <mass-object :rv0="{ x: 2, y: 2 }" :v0="{ x: 10 }"
             :f="{ x: -3, y: -2 }" :m="1">
           <cube texture="cobblestone" :size="1"></cube>
@@ -28,7 +28,7 @@
         </movement-object>
       </movement-system>
 
-      <oimo-world :options="{ gravity: [0, 1, 0] }">
+      <oimo-world :key="ui.sysKey" :options="{ gravity: [0, 1, 0] }">
         <space-system :m-scale="10 ** 4">
           <space-object v-for="t in textures" :key="t">
             <oimo-body :options="{ move: true, density: 1 }">
@@ -74,7 +74,7 @@ export default {
   created () {
     // hack: loop animation via vue key prop
     setInterval(() => {
-      this.ui.movemSysKey += 1
+      this.ui.sysKey += 1
     }, 15000)
   }
 }

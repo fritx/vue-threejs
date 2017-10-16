@@ -9,9 +9,9 @@ export function getModel () {
     sf03: {
       scale: 1
     },
-    movemSysKey: 0,
+    sysKey: 0,
     replay: () => {
-      ui.movemSysKey += 1
+      ui.sysKey += 1
     }
   }
   return ui
