@@ -15,6 +15,10 @@ export default {
     type: { type: String, default: 'Mesh' }
   },
 
+  provide () {
+    return { meshVm: this }
+  },
+
   methods: {
     handleGeometry (e) {
       e.stopPropagation()

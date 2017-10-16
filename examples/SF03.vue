@@ -1,36 +1,40 @@
 <template>
   <object3d :position="pos">
-    <div v-if="body">
-      <mesh :obj="body"></mesh>
+    <mesh>
+      <m-obj-mtl base-url="static/threex/spaceships/"
+          obj-url="SpaceFighter03.obj"
+          mtl-url="SpaceFighter03.mtl"
+          :process="getBody">
+      </m-obj-mtl>
+    </mesh>
 
-      <mesh v-for="n in 2" :key="n" :scale="4"
-          :position="{ x: 5 * Math.sign(n - 1.5), z: 0.8 }">
+    <mesh v-for="n in 2" :key="n" :scale="4"
+        :position="{ x: 5 * Math.sign(n - 1.5), z: 0.8 }">
+      <geometry type="Plane" :args="[1, 1]"></geometry>
+      <material type="MeshBasic" :options="detonation.matOpts">
+        <texture url="static/threex/spaceships/lensflare0_alpha.png"></texture>
+      </material>
+    </mesh>
+
+    <object3d v-for="n in 2" :key="n"
+        :rotation="{ y: Math.PI / 2 }" :scale="4"
+        :position="{ x: 5 * Math.sign(n - 1.5), z: 2.6 }">
+      <mesh v-for="n1 in 4" :key="n1"
+          :rotation="{ x: (n1 - 1) * Math.PI / 4 }">
         <geometry type="Plane" :args="[1, 1]"></geometry>
-        <material type="MeshBasic" :options="detonation.matOpts">
-          <texture url="static/threex/spaceships/lensflare0_alpha.png"></texture>
+        <material type="MeshBasic" :options="shoot.matOpts">
+          <texture :canvas="shoot.txtCanvas"></texture>
         </material>
       </mesh>
+    </object3d>
 
-      <object3d v-for="n in 2" :key="n"
-          :rotation="{ y: Math.PI / 2 }" :scale="4"
-          :position="{ x: 5 * Math.sign(n - 1.5), z: 2.6 }">
-        <mesh v-for="n1 in 4" :key="n1"
-            :rotation="{ x: (n1 - 1) * Math.PI / 4 }">
-          <geometry type="Plane" :args="[1, 1]"></geometry>
-          <material type="MeshBasic" :options="shoot.matOpts">
-            <texture :canvas="shoot.txtCanvas"></texture>
-          </material>
-        </mesh>
-      </object3d>
-
-      <animation :fn="animate"></animation>
-    </div>
+    <animation :fn="animate"></animation>
   </object3d>
 </template>
 
 <script>
-import { MTLLoader, OBJLoader, Object3D } from '@'
 import * as THREE from 'three'
+import { Object3D } from '@'
 
 export default {
   name: 'SF03',
@@ -58,28 +62,8 @@ export default {
         },
         txtCanvas: this.generateShootCanvas()
       },
-      pos: null,
-      body: null
+      pos: null
     }
-  },
-
-  /* eslint-disable semi, comma-dangle, space-in-parens */
-  created () {
-    // todo: better code
-    const mtlLoader = new MTLLoader();
-    mtlLoader.setBaseUrl( 'static/threex/spaceships/' )
-    mtlLoader.setPath( 'static/threex/spaceships/' )
-    mtlLoader.load( 'SpaceFighter03.mtl', ( materials ) => {
-      materials.preload();
-      const objLoader = new OBJLoader();
-      objLoader.setMaterials( materials );
-      objLoader.setPath( 'static/threex/spaceships/' )
-      objLoader.load( 'SpaceFighter03.obj', ( group ) => {
-        const body = group.children[0]
-        body.material.color.set(0xffffff)
-        this.body = body
-      })
-    })
   },
 
   methods: {
@@ -87,6 +71,13 @@ export default {
       this.pos = { y: Math.sin(tt) }
     },
 
+    getBody (group) {
+      let body = group.children[0]
+      body.material.color.set(0xffffff)
+      return body
+    },
+
+    /* eslint-disable semi, space-in-parens */
     generateShootCanvas () {
       // init canvas
       var canvas = document.createElement( 'canvas' );
