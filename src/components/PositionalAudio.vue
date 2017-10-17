@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { PositionalAudio } from 'three'
+import { PositionalAudio, AudioLoader } from 'three'
 import Object3D from './Object3D'
 
 export default {
@@ -18,10 +18,25 @@ export default {
     'global'
   ],
 
-  props: { url: String },
+  props: {
+    refDistance: { type: Number, default: 10 },
+    volume: { type: Number, default: 1 },
+    paused: Boolean,
+    loop: Boolean,
+    url: String
+  },
 
   data () {
     return { audio: null }
+  },
+
+  watch: {
+    paused (v) {
+      if (this.audio) {
+        if (v) this.audio.pause()
+        else this.audio.play()
+      }
+    }
   },
 
   // mounted to ensure audioListener
@@ -29,20 +44,19 @@ export default {
     let listener = this.global.audioListener // fixme
     let audio = new PositionalAudio(listener)
     audio.name = 'PositionalAudio'
-    this.audio = audio
+    audio.setRefDistance(this.refDistance)
+    audio.setVolume(this.volume)
+    audio.setLoop(this.loop)
 
-    // fixme: r76?
-    // https://github.com/mrdoob/three.js/blob/master/examples/misc_sound.html
-    // audioLoader.load(props.url, function (buffer) {
-    // r75:
-    audio.load(this.url)
-    audio.autoplay = true
-    audio.setLoop(true)
-    audio.setVolume(0.5)
-    audio.setRefDistance(10)
-    // audio.setBuffer(buffer)
-    // audio.play()
-    // })
+    new AudioLoader().load(this.url, buffer => {
+      audio.setBuffer(buffer)
+      if (!this.paused) audio.play()
+    })
+    this.audio = audio
+  },
+
+  beforeDestroy () {
+    this.audio.stop()
   }
 }
 </script>
