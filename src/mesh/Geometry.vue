@@ -5,8 +5,8 @@ import * as THREE from 'three'
 export default {
   name: 'Geometry',
   mixins: [Base],
+  inject: ['meshVm'],
   props: {
-    obj: { type: Object },
     args: { type: Array, default: () => [] },
     type: { type: String, default: '' }
   },
@@ -18,15 +18,11 @@ export default {
   },
 
   mounted () {
-    this.$emit('update:obj', this.geometry)
-    this.$nextTick(() => {
-      this.dispatchEvent('vm-geometry', this.geometry)
-    })
+    this.meshVm.curObj.geometry = this.geometry
   },
 
   beforeDestroy () {
-    this.dispatchEvent('vm-geometry', null)
-    this.$emit('update:obj', null)
+    this.meshVm.curObj.geometry = null
   }
 }
 </script>

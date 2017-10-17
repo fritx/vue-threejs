@@ -5,6 +5,7 @@ import * as THREE from 'three'
 export default {
   name: 'Material',
   mixins: [Base],
+  inject: ['meshVm'],
   props: {
     options: { type: Object, default: () => ({}) },
     color: { type: Number },
@@ -23,12 +24,10 @@ export default {
   },
 
   mounted () {
-    this.$nextTick(() => {
-      this.dispatchEvent('vm-material', this.material)
-    })
+    this.meshVm.curObj.material = this.material
   },
   beforeDestroy () {
-    this.dispatchEvent('vm-material', null)
+    this.meshVm.curObj.material = null
   }
 }
 </script>
