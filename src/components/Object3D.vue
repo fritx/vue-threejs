@@ -41,6 +41,9 @@ export default {
         Object.assign(this.curObj.rotation, v)
       }
     },
+    obj (obj) {
+      this.curObj = obj
+    },
     curObj (obj, oldObj) {
       this.unsetObj(oldObj)
       this.setObj(obj)

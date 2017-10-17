@@ -18,7 +18,7 @@ Vue.use(VueThreejs)
   <renderer :size="{ w: 600, h: 400 }">
     <scene>
       <camera :position="{ z: 15 }"></camera>
-      <object3d :obj="mesh" :position="{ y: -200 }"></object3d>
+      <mesh :obj="mesh" :position="{ y: -200 }"></mesh>
       <animation :fn="animate" :speed="3"></animation>
     </scene>
   </renderer>
@@ -40,15 +40,27 @@ Vue.use(VueThreejs)
 </movement-system>
 ```
 
+```vue
+<oimo-world :options="{ gravity: [0, -9.8, 0] }">
+  <space-system :m-scale="10 ** 4">
+    <space-object v-for="t in textures" :key="t">
+      <oimo-body :options="{ move: true, density: 1 }">
+        <cube :texture="t" :size="1"></cube>
+      </oimo-body>
+    </space-object>
+  </space-system>
+</oimo-world>
+```
+
 **Roadmap**
 
-- [ ] Basic components
+- [x] Basic components
   - [x] renderer/scene/camera/listener
   - [x] object3d/light/audio/controls/animation
-  - [ ] mesh/more
+  - [x] mesh/geometry/material/texture/obj-mtl
 - [ ] Watch for props change
-  - [x] position/rotation
-  - [ ] obj/more
+  - [x] position/rotation/obj
+  - [ ] more
 - [ ] Animation
   - [x] component/animate/speed/paused/blocked
   - [ ] global-control
