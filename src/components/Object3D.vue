@@ -11,7 +11,6 @@ export default {
       parentObj: this.curObj
     }
   },
-
   inject: ['parentObj'],
 
   props: {

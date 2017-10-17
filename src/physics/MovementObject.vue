@@ -11,11 +11,7 @@ export default {
   name: 'MovementObject',
   mixins: [Object3D],
   components: { Object3D },
-
-  inject: [
-    ...Object3D.inject,
-    'movemVms'
-  ],
+  inject: ['movemVms'],
 
   props: {
     a: Object,

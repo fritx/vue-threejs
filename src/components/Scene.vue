@@ -7,12 +7,7 @@ import Object3D from './Object3D'
 export default {
   name: 'Scene',
   mixins: [Object3D],
-
-  inject: [
-    ...Object3D.inject,
-    'global'
-  ],
-
+  inject: ['global'],
   props: {
     obj: { type: Object }
   },
