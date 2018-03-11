@@ -7,7 +7,7 @@
       </m-obj-mtl>
     </mesh>
 
-    <mesh v-for="n in 2" :key="n" :scale="4"
+    <mesh v-for="n in 2" :key="`1-${n}`" :scale="4"
         :position="{ x: 5 * Math.sign(n - 1.5), z: 0.8 }">
       <geometry type="Plane" :args="[1, 1]"></geometry>
       <material type="MeshBasic" :options="detonation.matOpts">
@@ -15,7 +15,7 @@
       </material>
     </mesh>
 
-    <object3d v-for="n in 2" :key="n"
+    <object3d v-for="n in 2" :key="`2-${n}`"
         :rotation="{ y: Math.PI / 2 }" :scale="4"
         :position="{ x: 5 * Math.sign(n - 1.5), z: 2.6 }">
       <mesh v-for="n1 in 4" :key="n1"
