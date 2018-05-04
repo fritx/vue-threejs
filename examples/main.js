@@ -3,6 +3,8 @@
 import Vue from 'vue'
 import App from './App'
 
+// import VueThreejs from '@/../package/lib/' // testing pack
+// import VueThreejs from '@/../lib/' // testing build
 import VueThreejs from '@'
 Vue.use(VueThreejs)
 
