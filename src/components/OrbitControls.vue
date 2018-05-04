@@ -14,11 +14,7 @@ export default {
   name: 'OrbitControls',
   mixins: [Object3D],
   components: { Object3D },
-
-  inject: [
-    ...Object3D.inject,
-    'global'
-  ],
+  inject: ['global'],
 
   data () {
     return {

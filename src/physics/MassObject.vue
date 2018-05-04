@@ -6,12 +6,6 @@ import Vue from 'vue'
 export default {
   name: 'MassObject',
   mixins: [MovementObject],
-
-  // Vue provide/inject not inherited??
-  // inject: [
-  //   ...MovementObject.inject
-  // ],
-
   props: {
     f: Object,
     m: { type: Number, default: 1 }

@@ -1,53 +1,68 @@
 <template>
-  <object3d :position="pos">
-    <div v-if="body">
-      <object3d :obj="body"></object3d>
-      <object3d :obj="detonation1" :position="{ x: 5, z: 0.8 }"></object3d>
-      <object3d :obj="detonation2" :position="{ x: -5, z: 0.8 }"></object3d>
-      <object3d :obj="shoot1" :position="{ x: 5, z: 2.6 }"></object3d>
-      <object3d :obj="shoot2" :position="{ x: -5, z: 2.6 }"></object3d>
-      <animation :fn="animate"></animation>
-    </div>
+  <object3d :position="pos" base-url="static/threex/spaceships/">
+    <mesh>
+      <m-obj-mtl obj-url="SpaceFighter03.obj"
+          mtl-url="SpaceFighter03.mtl"
+          :process="getBody">
+      </m-obj-mtl>
+    </mesh>
+
+    <mesh v-for="n in 2" :key="`1-${n}`" :scale="4"
+        :position="{ x: 5 * Math.sign(n - 1.5), z: 0.8 }">
+      <geometry type="Plane" :args="[1, 1]"></geometry>
+      <material type="MeshBasic" :options="detonation.matOpts">
+        <texture url="lensflare0_alpha.png"></texture>
+      </material>
+    </mesh>
+
+    <object3d v-for="n in 2" :key="`2-${n}`"
+        :rotation="{ y: Math.PI / 2 }" :scale="4"
+        :position="{ x: 5 * Math.sign(n - 1.5), z: 2.6 }">
+      <mesh v-for="n1 in 4" :key="n1"
+          :rotation="{ x: (n1 - 1) * Math.PI / 4 }">
+        <geometry type="Plane" :args="[1, 1]"></geometry>
+        <material type="MeshBasic" :options="shoot.matOpts">
+          <texture :canvas="shoot.txtCanvas"></texture>
+        </material>
+      </mesh>
+    </object3d>
+
+    <animation :fn="animate"></animation>
   </object3d>
 </template>
 
 <script>
 import * as THREE from 'three'
-import { MTLLoader, OBJLoader, Object3D } from '@'
+import { Object3D } from '@'
 
 export default {
   name: 'SF03',
   mixins: [Object3D],
 
   data () {
-    return { pos: null, body: null }
-  },
-
-  /* eslint-disable */
-  created () {
-    // todo: better code
-    const mtlLoader = new MTLLoader();
-    mtlLoader.setBaseUrl( 'static/threex/spaceships/' )
-    mtlLoader.setPath( 'static/threex/spaceships/' )
-    mtlLoader.load( 'SpaceFighter03.mtl', ( materials ) => {
-      materials.preload();
-      const objLoader = new OBJLoader();
-      objLoader.setMaterials( materials );
-      objLoader.setPath( 'static/threex/spaceships/' )
-      objLoader.load( 'SpaceFighter03.obj', ( group ) => {
-        const body = group.children[0]
-        body.material.color.set(0xffffff)
-        this.body = body
-      })
-    })
-
-    const detonation = this.generateDetonation()
-    this.detonation1 = detonation
-    this.detonation2 = detonation.clone()
-
-    const shoot = this.generateShoot()
-    this.shoot1 = shoot
-    this.shoot2 = shoot.clone()
+    return {
+      detonation: {
+        matOpts: {
+          color: 0x00ffff,
+          side: THREE.DoubleSide,
+          blending: THREE.AdditiveBlending,
+          opacity: 2,
+          depthWrite: false,
+          transparent: true
+        }
+      },
+      shoot: {
+        matOpts: {
+          color: 0xffaacc,
+          side: THREE.DoubleSide,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false,
+          transparent: true
+        },
+        txtCanvas: this.generateShootCanvas()
+      },
+      pos: null
+    }
   },
 
   methods: {
@@ -55,51 +70,13 @@ export default {
       this.pos = { y: Math.sin(tt) }
     },
 
-    generateDetonation () {
-      var texture = new THREE.TextureLoader()
-        .load(require('@root/static/threex/spaceships/lensflare0_alpha.png'))
-      var geometry = new THREE.PlaneGeometry(1, 1)
-      var material = new THREE.MeshBasicMaterial({
-        color: 0x00ffff,
-        map: texture,
-        side: THREE.DoubleSide,
-        blending: THREE.AdditiveBlending,
-        opacity: 2,
-        depthWrite: false,
-        transparent: true,
-      })
-      var detonation = new THREE.Mesh(geometry, material)
-      detonation.scale.multiplyScalar(4)
-      return detonation
+    getBody (group) {
+      let body = group.children[0]
+      body.material.color.set(0xffffff)
+      return body
     },
 
-    generateShoot () {
-      var canvas = this.generateShootCanvas();
-      var texture = new THREE.Texture( canvas );
-      texture.needsUpdate = true;
-      var material = new THREE.MeshBasicMaterial({
-        color: 0xffaacc,
-        map: texture,
-        side: THREE.DoubleSide,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false,
-        transparent: true,
-      })
-
-      var container = new THREE.Object3D()
-      container.rotateY(Math.PI / 2)
-      container.scale.multiplyScalar(4)
-      var nPlanes = 4;
-      for (var i = 0; i < nPlanes; i++) {
-        var geometry = new THREE.PlaneGeometry(1, 1)
-        var mesh = new THREE.Mesh(geometry, material)
-        mesh.material = material
-        mesh.rotateX(i * Math.PI / nPlanes)
-        container.add(mesh)
-      }
-      return container
-    },
-
+    /* eslint-disable semi, space-in-parens */
     generateShootCanvas () {
       // init canvas
       var canvas = document.createElement( 'canvas' );

@@ -15,6 +15,7 @@ export default {
   provide () {
     return {
       parentObj: null, // avoid "injection not found" warning
+      _baseUrl: null,
       global: this.global
     }
   },
