@@ -1,7 +1,7 @@
 <template>
-  <object3d :position="pos" :rotation="rot">
+  <Object3D :position="pos" :rotation="rot">
     <slot></slot>
-  </object3d>
+  </Object3D>
 </template>
 
 <script>

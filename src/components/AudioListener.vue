@@ -1,5 +1,5 @@
 <template>
-  <object3d :obj="listener" :position="position"></object3d>
+  <Object3D :obj="listener" :position="position"></Object3D>
 </template>
 
 <script>

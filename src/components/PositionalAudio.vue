@@ -1,6 +1,6 @@
 <template>
   <div>
-    <object3d v-if="audio" :obj="audio"></object3d>
+    <Object3D v-if="audio" :obj="audio"></Object3D>
   </div>
 </template>
 
