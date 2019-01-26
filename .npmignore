@@ -21,8 +21,14 @@ yarn-error.log*
 *.sw*
 
 package-lock.json
-/lib
+# /lib
 /package
 /package *
 *.tgz
 
+/examples
+/src
+/test
+/public
+/.editorconfig
+/*.config.js
