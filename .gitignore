@@ -8,6 +8,7 @@ yarn-error.log*
 test/unit/coverage
 package
 *.tgz
+package-lock.json
 
 # Editor directories and files
 .idea
