@@ -5,12 +5,13 @@
   "author": "Fritz Lin <uxfritz@163.com>",
   "repository": "https://github.com/fritx/vue-threejs",
   "license": "MIT",
-  "main": "./lib",
+  "main": "./lib/VueThreejs.common.js",
+  "unpkg": "./lib/VueThreejs.umd.min.js",
   "scripts": {
     "demo:deploy": "ghpages -p dist",
     "demo:dev": "vue-cli-service serve ./examples/main.js",
     "demo:build": "vue-cli-service build ./examples/main.js",
-    "build": "cross-env TARGET=lib vue-cli-service build ./src/index.js --target=lib --dest=lib",
+    "build": "cross-env TARGET=lib vue-cli-service build ./src/index.js --target=lib --dest=lib --name=VueThreejs",
     "lint": "vue-cli-service lint"
   },
   "peerDependencies": {
