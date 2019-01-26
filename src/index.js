@@ -19,8 +19,9 @@ exports.install = Vue => {
   Object.keys(vueComs).forEach(k => {
     // fix: name 'object3d' is required,
     // or it would be parsed to 'object-3-d' somewhere else
-    let rk = k
+    let rk
     if (k === 'Object3D') rk = 'object3d'
-    Vue.component(rk, vueComs[k])
+    if (rk) Vue.component(rk, vueComs[k])
+    Vue.component(k, vueComs[k])
   })
 }

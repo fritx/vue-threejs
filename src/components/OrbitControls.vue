@@ -1,7 +1,7 @@
 <template>
-  <object3d :rotation="{ y: Math.PI }">
+  <Object3D :rotation="{ y: Math.PI }">
     <slot></slot>
-  </object3d>
+  </Object3D>
 </template>
 
 <script>
