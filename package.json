@@ -10,7 +10,7 @@
     "demo:deploy": "ghpages -p dist",
     "demo:dev": "vue-cli-service serve ./examples/main.js",
     "demo:build": "vue-cli-service build ./examples/main.js",
-    "build": "cross-env TARGET=lib node build/build.js",
+    "build": "cross-env TARGET=lib vue-cli-service build ./src/index.js --target=lib --dest=lib",
     "lint": "vue-cli-service lint"
   },
   "peerDependencies": {
