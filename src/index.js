@@ -2,7 +2,7 @@ let vueComs = {}
 
 let vueContext = require.context('./', true, /\.vue$/)
 vueContext.keys().forEach(path => {
-  let com = vueContext(path)
+  let com = vueContext(path).default
   vueComs[com.name] = com
   exports[com.name] = com
 })
