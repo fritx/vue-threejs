@@ -5,7 +5,9 @@
 <script>
 export default {
   name: 'Base',
-  inject: ['_baseUrl'],
+  inject: {
+    _baseUrl: { name: '_baseUrl', default: null }
+  },
   props: {
     baseUrl: {
       type: String,

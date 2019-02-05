@@ -12,6 +12,8 @@
     "demo:dev": "vue-cli-service serve ./examples/main.js",
     "demo:build": "vue-cli-service build ./examples/main.js",
     "build": "cross-env TARGET=lib vue-cli-service build ./src/index.js --target=lib --dest=lib --name=VueThreejs",
+    "test:unit": "vue-cli-service test:unit",
+    "test": "npm run test:unit",
     "lint": "vue-cli-service lint"
   },
   "peerDependencies": {
@@ -21,8 +23,12 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.3.0",
     "@vue/cli-plugin-eslint": "^3.3.0",
+    "@vue/cli-plugin-unit-jest": "^3.4.0",
     "@vue/cli-service": "^3.3.0",
+    "@vue/test-utils": "^1.0.0-beta.20",
+    "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
     "cross-env": "^4.0.0",
     "dat.gui": "^0.7.5",
     "eslint": "^5.8.0",
