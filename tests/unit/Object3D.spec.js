@@ -18,14 +18,11 @@ describe('Object3D.vue', () => {
           .toMatchObject({ x: 0, y: 3, z: -5 })
       })
 
-      it('should watch props', (done) => {
+      it('should watch props', () => {
         const wrapper = shallowMount(Object3D)
         wrapper.setProps({ [k]: { x: -7 } })
-        wrapper.vm.$nextTick(() => {
-          expect(wrapper.vm.curObj[k])
-            .toMatchObject({ x: -7, y: 0, z: 0 })
-          done()
-        })
+        expect(wrapper.vm.curObj[k])
+          .toMatchObject({ x: -7, y: 0, z: 0 })
       })
     })
   })
