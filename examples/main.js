@@ -5,7 +5,8 @@ import App from './App'
 
 // import * as VueThreejs from '@/../package/lib/VueThreejs.common' // testing pack
 // import * as VueThreejs from '@/../lib/VueThreejs.common' // testing build
-import VueThreejs from '@'
+import * as VueThreejs from '@'
+// import VueThreejs from '@'
 Vue.use(VueThreejs)
 
 Vue.config.productionTip = false

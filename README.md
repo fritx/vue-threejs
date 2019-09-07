@@ -9,7 +9,9 @@ Demos: [react-world][react-world], [vue-world][vue-world]
 <img width="400" src="https://github.com/fritx/react-threejs/raw/dev/debugging.jpg">
 
 ```js
-import VueThreejs from 'vue-threejs'
+// import VueThreejs from 'vue-threejs' // below 0.2.0
+import * as VueThreejs from 'vue-threejs' // >= 0.2.0
+
 Vue.use(VueThreejs)
 ```
 
