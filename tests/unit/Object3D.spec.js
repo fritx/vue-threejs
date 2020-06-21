@@ -21,8 +21,10 @@ describe('Object3D.vue', () => {
       it('should watch props', () => {
         const wrapper = shallowMount(Object3D)
         wrapper.setProps({ [k]: { x: -7 } })
-        expect(wrapper.vm.curObj[k])
-          .toMatchObject({ x: -7, y: 0, z: 0 })
+        setTimeout(() => {
+          expect(wrapper.vm.curObj[k])
+            .toMatchObject({ x: -7, y: 0, z: 0 })
+        })
       })
     })
   })
