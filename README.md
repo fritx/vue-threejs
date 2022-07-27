@@ -1,5 +1,7 @@
 # vue-threejs
 
+<a href="https://www.npmjs.com/package/vue-threejs"><img height="20" src="https://img.shields.io/npm/dm/vue-threejs.svg"></a>
+
 > \[WIP\] [Three.js][threejs] bindings for [Vue][vue]
 
 Migrated from [react-threejs][react-threejs]
